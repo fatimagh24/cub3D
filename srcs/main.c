@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 13:38:03 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/15 15:22:34 by fghanem          ###   ########.fr       */
+/*   Created: 2025/07/16 12:47:09 by fghanem           #+#    #+#             */
+/*   Updated: 2025/07/16 14:05:05 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,33 @@
 
 int    main(int argc, char **argv)
 {
-    if (argc != 2)
-    {
-        ft_putstr_fd("Error: Incorrect number of arguments\n", 2);
-        return (1);
-    }
-    int fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-    {
-        ft_putstr_fd("Error: Could not open file\n", 2);
-        return (1);
-    }
-    char *line;
-    int i = 0;
-    line = get_next_line(fd);
-    while (line != NULL)
-    {
-        if (line[0] == '\0')
-        {
-            free(line);
-            continue;
-        }
-        printf("Line %d: %s\n", i++, line);
-        free(line);
-        line = get_next_line(fd);
-    }
-    return (0);
+    t_data data;
+    t_map   map;
+	int		i;
+
+	if (argc != 2)
+	{
+		write(2, "Usage: ./cub3d map.cub\n", 24);
+		return (1);
+	}
+    init_map(&map);
+    init_data(&data, &map);
+    parse_map(argv[1], &data);
+    
+    // Print info
+	printf("1. \n NO: %s\nSO: %s\nWE: %s\nEA: %s\n",
+		data.n_path, data.s_path, data.w_path, data.e_path);
+	printf("F: %d,%d,%d\n", data.floor_color.r, data.floor_color.g, data.floor_color.b);
+	printf("C: %d,%d,%d\n", data.ceiling_color.r, data.ceiling_color.g, data.ceiling_color.b);
+
+	i = 0;
+	while (data.map_data.grid && data.map_data.grid[i])
+	{
+		write(1, data.map_data.grid[i], ft_strlen(data.map_data.grid[i]));
+		i++;
+	}
+	printf("\nPlayer: (%d, %d) facing %c\n",
+		data.map_data.player_x, data.map_data.player_y, data.map_data.player_dir);
+	return (0);
+
 }

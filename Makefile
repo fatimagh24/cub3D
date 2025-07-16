@@ -8,7 +8,7 @@ MLX_LIB = -L $(MLX_PATH) -lmlx -lXext -lX11
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-src= main.c
+src= main.c parse_map.c
 
 SRC_DIR = srcs
 OBJ_DIR = obj
