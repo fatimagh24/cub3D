@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/17 16:44:39 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/17 17:20:43 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void check_map(char **grid, t_map *map)
 					exit(EXIT_FAILURE);
 				}
 			}
-            if ()
+            // if ()
 			j++;
 		}
 		i++;
