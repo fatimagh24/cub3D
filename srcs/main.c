@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 12:47:09 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/16 14:05:05 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:41:07 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int    main(int argc, char **argv)
 		write(2, "Usage: ./cub3d map.cub\n", 24);
 		return (1);
 	}
+	if (ft_strlen(argv[1]) < 4 || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
+	{
+		write(2, "Error: Map file must have a .cub extension\n", 43);
+		return (1);
+	}
+	check_valid_map(argv[1]);
     init_map(&map);
     init_data(&data, &map);
     parse_map(argv[1], &data);
@@ -44,3 +50,4 @@ int    main(int argc, char **argv)
 	return (0);
 
 }
+

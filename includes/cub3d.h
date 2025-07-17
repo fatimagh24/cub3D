@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/16 12:49:54 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:44:48 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+
+typedef struct s_config_state
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+	int	config_done;
+    int player_found;
+}	t_config_state;
 
 typedef struct s_color
 {
@@ -60,5 +72,7 @@ typedef struct s_data
 void    parse_map(char *map_name, t_data *data);
 void init_data(t_data *data, t_map *map);
 void    init_map(t_map *map);
-
+void	check_valid_map(char *map_name);
+// void	check_valid_map(const char *map_name);
+void check_map(char **grid, t_map *map);
 #endif

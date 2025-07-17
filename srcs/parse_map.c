@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/16 14:10:23 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/17 16:41:18 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ static void copy_map_grid(t_data *data, int start, int total)
 	}
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
+	check_map(data->map_data.grid, &data->map_data);
 	find_player(data);
 }
 
@@ -163,4 +164,3 @@ void    parse_map(char *map_name, t_data *data)
     if (map_start >= 0)
 		copy_map_grid(data, map_start, i);
 }
-
