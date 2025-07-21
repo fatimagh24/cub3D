@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 12:47:09 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/17 16:41:07 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/21 13:26:49 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int    main(int argc, char **argv)
 		write(2, "Error: Map file must have a .cub extension\n", 43);
 		return (1);
 	}
-	check_valid_map(argv[1]);
+	if (check_valid_map(argv[1]) == 1)
+		return (1);
     init_map(&map);
     init_data(&data, &map);
-    parse_map(argv[1], &data);
+    if (parse_map(argv[1], &data) == 1)
+		return (1);
     
     // Print info
 	printf("1. \n NO: %s\nSO: %s\nWE: %s\nEA: %s\n",

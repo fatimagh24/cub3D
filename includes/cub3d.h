@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/17 16:44:48 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/21 13:26:21 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ typedef struct s_data
     t_color ceiling_color;
 }   t_data;
 
-void    parse_map(char *map_name, t_data *data);
+int    parse_map(char *map_name, t_data *data);
 void init_data(t_data *data, t_map *map);
 void    init_map(t_map *map);
-void	check_valid_map(char *map_name);
+int	check_valid_map(char *map_name);
 // void	check_valid_map(const char *map_name);
-void check_map(char **grid, t_map *map);
+int     check_map(char **grid, t_map *map);
+void    clean_array(char **arr);
+void	free_data(t_data *data);
+
+int	has_single_player(char **map);
 #endif

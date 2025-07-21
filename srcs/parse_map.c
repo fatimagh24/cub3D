@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/17 16:41:18 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/21 14:32:29 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	parse_color(t_color *color, char *line)
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
-    // free_array(rgb);
+    clean_array(rgb);
 }
 
 static void	parse_texture(t_data *data, char *line)
@@ -128,11 +128,21 @@ static void copy_map_grid(t_data *data, int start, int total)
 	}
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
-	check_map(data->map_data.grid, &data->map_data);
+	printf("%d \n", data->map_data.height);
+	if (has_single_player(data->map_data.grid) == 1)
+	{
+		free_data(data);
+		exit(1);
+	}
+	if (check_map(data->map_data.grid, &data->map_data) == 1)
+	{
+		free_data(data);
+		exit(1);
+	}
 	find_player(data);
 }
 
-void    parse_map(char *map_name, t_data *data)
+int    parse_map(char *map_name, t_data *data)
 {
     int fd;
     char *line;
@@ -146,8 +156,8 @@ void    parse_map(char *map_name, t_data *data)
     fd = open(map_name, O_RDONLY);
     if (fd < 0)
     {
-        perror("Error opening file");
-        return;
+        ft_putstr_fd("Error opening file", 2);
+        return (1);
     }
     while ((line = get_next_line(fd)))
 	{
@@ -163,4 +173,5 @@ void    parse_map(char *map_name, t_data *data)
     close(fd);
     if (map_start >= 0)
 		copy_map_grid(data, map_start, i);
+	return (0);
 }
