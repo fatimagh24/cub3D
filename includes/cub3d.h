@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/21 13:26:21 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/24 16:35:51 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_color
 typedef struct s_map
 {
     char    **grid;
-    int     width;
     int     player_x;
     int     player_y;
     char    player_dir;
@@ -54,7 +53,6 @@ typedef struct s_data
 {
     void    *mlx_ptr;
     void    *win_ptr;
-    int     width;
     int     height;
     char    **map;
     int     player_x;
@@ -77,6 +75,8 @@ int	check_valid_map(char *map_name);
 int     check_map(char **grid, t_map *map);
 void    clean_array(char **arr);
 void	free_data(t_data *data);
-
+void	fix_map(char **temp);
+int	check_colors(char **rgb);
 int	has_single_player(char **map);
+void	free_first(t_data *data);
 #endif

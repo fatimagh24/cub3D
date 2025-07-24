@@ -1,6 +1,6 @@
 NAME= cub3d
 CC= cc 
-CFILES= -Wall -Wextra -Werror
+CFILES= -Wall -Wextra -Werror -g
 MLX_PATH = ../minilibx-linux
 MLX_LIB = -L $(MLX_PATH) -lmlx -lXext -lX11
 

@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/21 13:17:17 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/24 16:37:25 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    clean_array(char **arr)
     int	i;
 
 	if (!arr)
-		return;
+		return ;
 	i = 0;
 	while (arr[i])
 	{
@@ -39,4 +39,18 @@ void	free_data(t_data *data)
 		free(data->e_path);
 	clean_array(data->map);
 	clean_array(data->map_data.grid);
+}
+
+void	free_first(t_data *data)
+{
+	if (data->n_path)
+		free(data->n_path);
+	if (data->s_path)
+		free(data->s_path);
+	if (data->w_path)
+		free(data->w_path);
+	if (data->e_path)
+		free(data->e_path);
+	free(data->map);
+	free(data->map_data.grid);
 }

@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/21 16:19:35 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:08:25 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,61 +84,99 @@ int	check_valid_map(char *map_name)
 	return (0);
 }
 
-static int	check_top_bottom_walls(char **grid, t_map *map)
-{
-	int	j;
-
-	j = 0;
-	// printf("first line %s\n", grid[0]);
-	while (grid[0][j] == ' ')
-		j++;
-	while (grid[0][j])
-	{
-		// if (grid[0][j] != '1' && grid[0][j] != ' ' && grid[0][j] != '\n')
-		// 	return (ft_putstr_fd("ERROR: INVALID TOP WALL\n", 2), 1);
-		j++;
-	}
-	j = 0;
-	while (grid[map->height - 1][j] == ' ')
-		j++;
-	while (grid[map->height - 1][j])
-	{
-		// if (grid[map->height - 1][j] != '1' && grid[map->height - 1][j] != ' ')
-		// 	return (ft_putstr_fd("ERROR: INVALID BOTTOM WALL\n", 2), 1);
-		j++;
-	}
-	return (0);
-}
-
-static int	check_side_walls(char **grid, t_map *map)
+void	fix_map(char **temp)
 {
 	int	i;
-	int	len;
+	int	j;
 
 	i = 0;
-	while (i < map->height)
+	while (temp[i])
 	{
-		len = ft_strlen(grid[i]);
-		// if ((grid[i][0] != '1' && grid[i][0] != ' ') ||
-		// 	(grid[i][len - 1] != '1' && grid[i][len - 1] != ' ')  && grid[i][0] != '\n')
-		// 	return (ft_putstr_fd("ERROR: INVALID SIDE WALL\n", 2), 1);
+		j = 0;
+		while (temp[i][j])
+		{
+			if (temp[i][j] == '\n')
+				temp[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
+}
+
+int	check_map(char **grid, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (grid[i])
+	{
+		j = 0;
+		while (grid[i][j])
+		{
+			if (i == 0 || i == map->height - 1 || j == 0 || j == ft_strlen(grid[i]) - 1)
+			{
+				while (grid[i][j] == ' ' ||  grid[i][j] == '\t' || grid[i][j] == '\v' || grid[i][j] == '\f' || grid[i][j] == '\r')
+					j++;
+				if (grid[i][j] != '1' || (grid[i][j] != '1' || grid[i][ft_strlen(grid[i]) - 1] != '1'))
+				{
+					ft_putstr_fd("ERROR: INVALID WALL\n", 2);
+					return (1);
+				}
+			}
+			j++;
+		}
 		i++;
 	}
 	return (0);
 }
 
-
-int	check_map(char **grid, t_map *map)
+static int	is_digit_str(char *s)
 {
-	if (check_top_bottom_walls(grid, map) == 1)
+	int	i;
+
+	i = 0;
+	if (!s || !*s)
+		return 0;
+	while (s[i])
 	{
-		// ft_putstr_fd("ERROR: INVALID MAP\n", 2);
-		return (1);
+		if (ft_isdigit(s[i]) == 0)
+			return (1);
+		i++;
 	}
-	if (check_side_walls(grid, map) == 1)
+	return (0);
+}
+
+int	check_colors(char **rgb)
+{
+	int	i;
+	int	j;
+	int	val;
+
+	i = 0;
+	val = 0;
+	while (rgb[i])
+		i++;
+	if (i != 3)
+		return (1);
+	i = 0;
+	while (i < 3)
 	{
-		// ft_putstr_fd("ERROR: INVALID MAP\n", 2);
-		return(1);
+		// j = 0;
+		j = 0;
+		while (rgb[i][j])
+		{
+			if (rgb[i][j] != ' ' && rgb[i][j] != '\t')
+			{
+				if (ft_isdigit((rgb[i][j])))
+					return (1);
+			}
+			j++;
+		}
+		val = ft_atoi(rgb[i]);
+		if (val < 0 || val > 255)
+			return (1);
+		i++;
 	}
 	return (0);
 }

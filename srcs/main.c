@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 12:47:09 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/21 13:26:49 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/24 12:24:06 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int    main(int argc, char **argv)
     if (parse_map(argv[1], &data) == 1)
 		return (1);
     
-    // Print info
 	printf("1. \n NO: %s\nSO: %s\nWE: %s\nEA: %s\n",
 		data.n_path, data.s_path, data.w_path, data.e_path);
 	printf("F: %d,%d,%d\n", data.floor_color.r, data.floor_color.g, data.floor_color.b);
@@ -44,7 +43,7 @@ int    main(int argc, char **argv)
 	i = 0;
 	while (data.map_data.grid && data.map_data.grid[i])
 	{
-		write(1, data.map_data.grid[i], ft_strlen(data.map_data.grid[i]));
+		printf("%s\n", data.map_data.grid[i]);
 		i++;
 	}
 	printf("\nPlayer: (%d, %d) facing %c\n",

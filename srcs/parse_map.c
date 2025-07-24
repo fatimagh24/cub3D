@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/21 14:32:29 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:16:05 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void init_data(t_data *data, t_map *map)
 {
     data->mlx_ptr = NULL;
     data->win_ptr = NULL;
-    data->width = 0;
     data->height = 0;
     data->map = NULL;
     data->map = malloc(sizeof(char *) * 100);
     if (!data->map)
-        perror("Memory allocation failed");
-    data->player_x = -1;
+	{
+        ft_putstr_fd("Memory allocation failed\n", 2);
+		exit(1);
+	}
+	data->player_x = -1;
     data->player_y = -1;
     data->player_dir = 0.0;
     data->e_path = NULL;
@@ -36,8 +38,12 @@ void init_data(t_data *data, t_map *map)
 
 void init_map(t_map *map)
 {
-    map->grid = NULL;
-    map->width = 0;
+    map->grid =  malloc(sizeof(char *) * 100);
+	if (!map->grid)
+	{
+        ft_putstr_fd("Memory allocation failed\n", 2);
+		exit(1);
+	}
     map->player_x = -1;
     map->player_y = -1;
     map->player_dir = '\0';
@@ -54,20 +60,31 @@ static int	is_map(const char *line)
     return (0);
 }
 
-static void	parse_color(t_color *color, char *line)
+static int	parse_color(t_color *color, char *line)
 {
 	char **rgb;
     
     rgb = ft_split(line, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-		return;
+	int i  = 0;
+	while (rgb[i])
+	{
+		printf("%s\n", rgb[i]);
+		i++;
+	}
+	if (check_colors(rgb) == 1)
+	{
+		ft_putstr_fd("Invalid color\n", 2);
+		clean_array(rgb);
+		return (1);
+	}
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
     clean_array(rgb);
+	return (0);
 }
 
-static void	parse_texture(t_data *data, char *line)
+static int	parse_texture(t_data *data, char *line)
 {
 	while (*line == ' ')
 		line++;
@@ -80,9 +97,16 @@ static void	parse_texture(t_data *data, char *line)
 	else if (!ft_strncmp(line, "EA ", 3))
 		data->e_path = ft_strdup(line + 3);
 	else if (!ft_strncmp(line, "F ", 2))
-		parse_color(&data->floor_color, line + 2);
+	{
+		if (parse_color(&data->floor_color, line + 2) == 1)
+			return (1);
+	}
 	else if (!ft_strncmp(line, "C ", 2))
-		parse_color(&data->ceiling_color, line + 2);
+	{
+		if (parse_color(&data->ceiling_color, line + 2))
+			return (1);
+	}
+	return (0);
 }
 
 static void	find_player(t_data *data)
@@ -120,15 +144,12 @@ static void copy_map_grid(t_data *data, int start, int total)
 	while (start < total)
 	{
 		data->map_data.grid[i] = ft_strdup(data->map[start]);
-		int len = ft_strlen(data->map[start]);
-		if (len > data->map_data.width)
-			data->map_data.width = len;
 		start++;
 		i++;
 	}
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
-	printf("%d \n", data->map_data.height);
+	fix_map(data->map_data.grid);
 	if (has_single_player(data->map_data.grid) == 1)
 	{
 		free_data(data);
@@ -159,14 +180,24 @@ int    parse_map(char *map_name, t_data *data)
         ft_putstr_fd("Error opening file", 2);
         return (1);
     }
-    while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+    while (line)
 	{
-		data->map[i] = ft_strdup(line);
+		data->map[i] = line;
 		if (is_map(line) && map_start == -1)
 			map_start = i;
 		if (map_start == -1)
-			parse_texture(data, line);
+		{
+			if (parse_texture(data, line) == 1)
+			{
+				free(line);
+				close(fd);
+				free_first(data);
+				return (1);
+			}
+		}
 		free(line);
+		line = get_next_line(fd);
 		i++;
 	}
     data->map[i] = NULL;
