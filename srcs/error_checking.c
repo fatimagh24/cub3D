@@ -6,25 +6,23 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/24 18:08:25 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:20:25 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	exit_with_error(char *msg, char *line, int fd)
+int	exit_with_error(char *msg, char *line, int fd)
 {
 	ft_putstr_fd(msg, 2);
 	if (line)
-	{
 		free(line);
-	}
 	if (fd >= 0)
 		close(fd);
 	return (1);
 }
 
-static int	check_line_content(char *line, t_config_state *s, int fd)
+int	check_line_content(char *line, t_config_state *s, int fd)
 {
 	if (line[0] == '\n')
 		return (0);
@@ -84,25 +82,6 @@ int	check_valid_map(char *map_name)
 	return (0);
 }
 
-void	fix_map(char **temp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (temp[i])
-	{
-		j = 0;
-		while (temp[i][j])
-		{
-			if (temp[i][j] == '\n')
-				temp[i][j] = '\0';
-			j++;
-		}
-		i++;
-	}
-}
-
 int	check_map(char **grid, t_map *map)
 {
 	int	i;
@@ -114,7 +93,7 @@ int	check_map(char **grid, t_map *map)
 		j = 0;
 		while (grid[i][j])
 		{
-			if (i == 0 || i == map->height - 1 || j == 0 || j == ft_strlen(grid[i]) - 1)
+			if (i == 0 || i == map->height - 1 || j == 0 || j == (int)(ft_strlen(grid[i]) - 1))
 			{
 				while (grid[i][j] == ' ' ||  grid[i][j] == '\t' || grid[i][j] == '\v' || grid[i][j] == '\f' || grid[i][j] == '\r')
 					j++;
@@ -127,84 +106,6 @@ int	check_map(char **grid, t_map *map)
 			j++;
 		}
 		i++;
-	}
-	return (0);
-}
-
-static int	is_digit_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s || !*s)
-		return 0;
-	while (s[i])
-	{
-		if (ft_isdigit(s[i]) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_colors(char **rgb)
-{
-	int	i;
-	int	j;
-	int	val;
-
-	i = 0;
-	val = 0;
-	while (rgb[i])
-		i++;
-	if (i != 3)
-		return (1);
-	i = 0;
-	while (i < 3)
-	{
-		// j = 0;
-		j = 0;
-		while (rgb[i][j])
-		{
-			if (rgb[i][j] != ' ' && rgb[i][j] != '\t')
-			{
-				if (ft_isdigit((rgb[i][j])))
-					return (1);
-			}
-			j++;
-		}
-		val = ft_atoi(rgb[i]);
-		if (val < 0 || val > 255)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	has_single_player(char **map)
-{
-	int	i;
-	int	j;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	if (count != 1)
-	{
-		ft_putstr_fd("Error: Invalid number of players\n", 2);
-		return (1);
 	}
 	return (0);
 }

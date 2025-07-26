@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/24 16:37:25 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:37:34 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,10 @@ void	free_first(t_data *data)
 	if (data->e_path)
 		free(data->e_path);
 	free(data->map);
-	free(data->map_data.grid);
+	free_map(&data->map_data);
+}
+
+void	free_map(t_map *map)
+{
+	clean_array(map->grid);
 }

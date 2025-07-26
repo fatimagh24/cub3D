@@ -1,6 +1,6 @@
 NAME= cub3d
 CC= cc 
-CFILES= -Wall -Wextra -Werror -g
+CFLAGS= -Wall -Wextra -Werror -g
 MLX_PATH = ../minilibx-linux
 MLX_LIB = -L $(MLX_PATH) -lmlx -lXext -lX11
 
@@ -9,7 +9,9 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 src= main.c parse_map.c error_checking.c \
-	clean_map.c
+	clean_map.c initialize.c \
+	fill_map.c error_check_two.c \
+	check_player_path.c
 
 SRC_DIR = srcs
 OBJ_DIR = obj
@@ -29,7 +31,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -44,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, re, clean, fclean
+.PHONY: all re clean fclean

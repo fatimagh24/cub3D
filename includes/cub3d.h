@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/24 16:35:51 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:35:23 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_data
     void    *win_ptr;
     int     height;
     char    **map;
-    int     player_x;
-    int     player_y;
     double  player_dir;
     char    *e_path; //east texture
     char    *n_path; //north texture
@@ -79,4 +77,21 @@ void	fix_map(char **temp);
 int	check_colors(char **rgb);
 int	has_single_player(char **map);
 void	free_first(t_data *data);
+void copy_map_grid(t_data *data, int start, int total);
+int	is_map(const char *line);
+int	parse_color(t_color *color, char *line);
+int	parse_texture(t_data *data, char *line);
+int check_digit_color(char **rgb);
+int	check_line_content(char *line, t_config_state *s, int fd);
+int	exit_with_error(char *msg, char *line, int fd);
+void	find_player(t_data *data);
+void	free_grid(char **grid);
+char	**copy_grid(char **grid, int height);
+int	is_player_path_correct(t_map *map, int px, int py);
+int	flood_fill(int x, int y, char **grid, int height);
+void	free_map(t_map *map);
+
+
+
+
 #endif
