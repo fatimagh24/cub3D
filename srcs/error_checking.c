@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:03:25 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:45:51 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	exit_with_error(char *msg, char *line, int fd)
 {
+	(void)line;
 	ft_putstr_fd(msg, 2);
-	if (line)
-		free(line);
 	if (fd >= 0)
 		close(fd);
 	return (1);
@@ -42,7 +41,7 @@ int	check_line_content(char *line, t_config_state *s, int fd)
 	{
 		if (s->no != 1 || s->so != 1 || s->we != 1 || s->ea != 1
 			|| s->f != 1 || s->c != 1)
-			return (exit_with_error("Error: Missing configers \n", line, fd));
+			return (exit_with_error("Error: Missing or extra configers \n", line, fd));
 		s->config_done = 1;
 	}
 	else if (!s->config_done)
@@ -66,7 +65,8 @@ int	check_valid_map(char *map_name)
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 		return (exit_with_error("Error opening map file\n", NULL, -1));
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (check_line_content(line, &s, fd) == 1)
 		{
@@ -75,10 +75,13 @@ int	check_valid_map(char *map_name)
 			return (1);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
+	if (line)
+		free(line);
 	close(fd);
-	if (s.no != 1 || s.so != 1 || s.we != 1 || s.ea != 1 || s.f != 1 || s.c != 1)
-		return (exit_with_error("Error: Missing or duplicate configuration lines\n", line, -1));
+	// if (s.no != 1 || s.so != 1 || s.we != 1 || s.ea != 1 || s.f != 1 || s.c != 1)
+	// 	return (exit_with_error("Error: Missing or duplicate configuration lines\n", line, -1));
 	return (0);
 }
 

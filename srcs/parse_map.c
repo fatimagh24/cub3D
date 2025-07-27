@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:09:35 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:37:02 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ int    parse_map(char *map_name, t_data *data)
     close(fd);
     if (map_start >= 0)
 		copy_map_grid(data, map_start, i);
-	// if (!is_player_path_correct(&data->map_data, data->map_data.player_x, data->map_data.player_y))
-	// {
-	// 	free_data(data);
-	// 	ft_putstr_fd("Error: Map is not closed!\n", 2);
-	// 	return (1);
-	// }
+	if (!is_player_path_correct(&data->map_data, data->map_data.player_x, data->map_data.player_y))
+	{
+		free_data(data);
+		ft_putstr_fd("Error: Player has invalid path!\n", 2);
+		return (1);
+	}
 	return (0);
 }
 

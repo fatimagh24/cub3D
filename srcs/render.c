@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:24:10 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 16:33:24 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:37:09 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void init_player(t_data *data)
     int y = data->map_data.player_y;
     char dir = data->map_data.player_dir;
 
-    data->pos_x = x + 0.5;  // نحطه بالنص
+    data->pos_x = x + 0.5;
     data->pos_y = y + 0.5;
 
     if (dir == 'N')

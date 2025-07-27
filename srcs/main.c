@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:38:03 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:11:13 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:40:33 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int ac, char **argv)
 	if (check_valid_map(argv[1]))
     {
         clean_exit(&data, "Error: Invalid map config\n", 1);
+        // free_all(&data);
 		return (1);
     }
     init_map(&map);

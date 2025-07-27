@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:30:20 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:36:25 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,17 @@ void	free_first(t_data *data)
 void	free_map(t_map *map)
 {
 	clean_array(map->grid);
+}
+
+void	free_grid(char **grid)
+{
+	int	i;
+
+    i = 0;
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }
