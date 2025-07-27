@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:36:25 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:04:19 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	destroy_window(t_data *game)
 }
 void	free_data(t_data *data)
 {
-	free_textures(data);
+	//free_textures(data);
 	destroy_window(data);
 
 	free(data->n_path);

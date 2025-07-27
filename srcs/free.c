@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:42:44 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 16:47:03 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:03:04 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_all(t_data *game)
 
 	free_data(game);
 
-	free(game); 
+	//free(game); 
 }
 
 
@@ -39,10 +39,6 @@ int clean_exit(t_data *data, char *error_msg, int code)
 {
 	if (error_msg)
 		ft_putstr_fd(error_msg, 2);
-	free_data(data);
-	exit(code);
-	return (code);
-
     if (data->north.img)
         mlx_destroy_image(data->mlx_ptr, data->north.img);
     if (data->south.img)
@@ -55,4 +51,5 @@ int clean_exit(t_data *data, char *error_msg, int code)
         mlx_destroy_image(data->mlx_ptr, data->img_ptr);
     if (data->win_ptr)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+    return code;
 }

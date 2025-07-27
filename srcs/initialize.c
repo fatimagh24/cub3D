@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:15:31 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 16:31:37 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/27 17:00:58 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ void init_data(t_data *data, t_map *map)
     data->floor_color = (t_color){-1, -1, -1};
 	data->ceiling_color = (t_color){-1, -1, -1};
     data->map_data = *map;
+    data->img_ptr= NULL;
+    data->img_data = NULL;
+    data->bpp = 0;
+    data->line_len = 0;
+    data->endian = 0;
+    data->north = (t_texture){NULL, NULL, 0, 0, 0, 0, 0};
+    data->south = (t_texture){NULL, NULL, 0, 0, 0, 0, 0};
+    data->east = (t_texture){NULL, NULL, 0, 0, 0, 0, 0};
+    data->west = (t_texture){NULL, NULL, 0, 0, 0, 0, 0};
+    data->pos_x = 0.0;
+    data->pos_y = 0.0;
+    data->dir_x = 0.0;
+    data->dir_y = 0.0;
+    data->plane_x = 0.0;
+    data->plane_y = 0.0;
 }
 
 void init_map(t_map *map)

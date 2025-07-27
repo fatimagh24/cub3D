@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:15:22 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 14:33:11 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:02:40 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int close_window(void *param)
 
     data = (t_data *)param;
     free_all(data);
+    //clean_exit(data, "Window closed by user\n", 0);
     exit(0);
     return (0);
 }
