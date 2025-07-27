@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/26 17:18:26 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:00:12 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 void copy_map_grid(t_data *data, int start, int total)
 {
 	int	i;
+	int len;
 
 	data->map_data.grid = malloc(sizeof(char *) * (total - start + 1));
 	if (!data->map_data.grid)
 		return;
 	i = 0;
+	len = 0;
 	while (start < total)
 	{
 		data->map_data.grid[i] = ft_strdup(data->map[start]);
+		len = ft_strlen(data->map[start]);
+		if (len > data->map_data.width)
+			data->map_data.width = len;
 		start++;
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 12:28:09 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/26 17:38:45 by fghanem          ###   ########.fr       */
+/*   Created: 2025/07/27 14:15:31 by rhasan            #+#    #+#             */
+/*   Updated: 2025/07/27 14:45:19 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,24 @@ void init_data(t_data *data, t_map *map)
 {
     data->mlx_ptr = NULL;
     data->win_ptr = NULL;
-    data->height = 0;
+    data->width = 1600;
+    data->height = 800;
     data->map = NULL;
     data->map = malloc(sizeof(char *) * 100);
     if (!data->map)
 	{
-        ft_putstr_fd("Memory allocation failed\n", 2);
-		exit(1);
+        perror("Memory allocation failed");
+		exit(EXIT_FAILURE);
 	}
+	data->player_x = -1;
+    data->player_y = -1;
     data->player_dir = 0.0;
     data->e_path = NULL;
     data->n_path = NULL;
     data->s_path = NULL;
     data->w_path = NULL;
+	data->mouse_captured = 0;
+	data->last_mouse_x = 0;
     data->floor_color = (t_color){-1, -1, -1};
 	data->ceiling_color = (t_color){-1, -1, -1};
     data->map_data = *map;
@@ -37,6 +42,7 @@ void init_data(t_data *data, t_map *map)
 void init_map(t_map *map)
 {
     map->grid = NULL;
+    map->width = 0;
     map->player_x = -1;
     map->player_y = -1;
     map->player_dir = '\0';

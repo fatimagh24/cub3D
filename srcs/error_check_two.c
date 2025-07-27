@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_check_two.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/26 13:17:52 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/27 14:34:40 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int check_digit_color(char **rgb)
 		{
 			if (rgb[i][j] != ' ' && rgb[i][j] != '\t' && rgb[i][j] != '\n')
 			{
-				if (ft_isdigit((rgb[i][j])))
+				if (!ft_isdigit((rgb[i][j])))
 					return (1);
 			}
 			j++;

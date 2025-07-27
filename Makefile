@@ -8,10 +8,9 @@ MLX_LIB = -L $(MLX_PATH) -lmlx -lXext -lX11
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-src= main.c parse_map.c error_checking.c \
-	clean_map.c initialize.c \
-	fill_map.c error_check_two.c \
-	check_player_path.c
+src= free.c parse_map.c error_checking.c \
+	clean_map.c main.c open_win.c render.c \
+	movement_utils.c hooks.c initialize.c error_check_two.c fill_map.c check_player_path.c\
 
 SRC_DIR = srcs
 OBJ_DIR = obj
@@ -27,7 +26,7 @@ $(LIBFT) :
 		@$(MAKE) -C $(LIBFT_DIR) all
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDES) $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) -I $(INCLUDES) -lm $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME)
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
