@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 15:00:12 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:30:20 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void copy_map_grid(t_data *data, int start, int total)
 	if (check_map(data->map_data.grid, &data->map_data) == 1)
 	{
 		free_data(data);
-		exit(1);
+		free_all(data);
+		return ;
+		// exit(1);
 	}
 	find_player(data);
 }

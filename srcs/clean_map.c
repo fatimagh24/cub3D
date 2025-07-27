@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 14:13:22 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:11:02 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	free_first(t_data *data)
 void	free_map(t_map *map)
 {
 	clean_array(map->grid);
+}
+
+void	free_grid(char **grid)
+{
+	int	i;
+
+    i = 0;
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }

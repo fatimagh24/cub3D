@@ -6,35 +6,45 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:42:19 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/26 17:26:17 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/27 16:32:26 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h" 
 
-int	flood_fill(int x, int y, char **grid, int height)
+static int	is_walkable(char c)
 {
-	if (y < 0 || y >= height)
-		return (0);
-	if (x < 0 || x >= (int)ft_strlen(grid[y]))
-		return (0);
-	if (grid[y][x] == ' ' || grid[y][x] == '\0')
-		return (0);
-	if (grid[y][x] == '1' || grid[y][x] == 'V')
-		return (1);
-	grid[y][x] = 'V';
-	if (!flood_fill(x + 1, y, grid, height))
-		return (0);
-	if (!flood_fill(x - 1, y, grid, height))
-		return (0);
-	if (!flood_fill(x, y + 1, grid, height))
-		return (0);
-	if (!flood_fill(x, y - 1, grid, height))
-		return (0);
-	return (1);
+	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
+static int	is_out_of_bounds(int x, int y, char **grid, int height)
+{
+	if (y < 0 || y >= height)
+		return (1);
+	if (x < 0 || x >= (int)strlen(grid[y]))
+		return (1);
+	return (0);
+}
 
+int	flood_fill(char **grid, int x, int y, int height)
+{
+	if (is_out_of_bounds(x, y, grid, height))
+		return (1);
+	if (grid[y][x] == ' ' || grid[y][x] == '\n')
+		return (1);
+	if (!is_walkable(grid[y][x]))
+		return (0);
+	grid[y][x] = 'x';
+	if (flood_fill(grid, x + 1, y, height))
+		return (1);
+	if (flood_fill(grid, x - 1, y, height))
+		return (1);
+	if (flood_fill(grid, x, y + 1, height))
+		return (1);
+	if (flood_fill(grid, x, y - 1, height))
+		return (1);
+	return (0); 
+}
 
 int	is_player_path_correct(t_map *map, int px, int py)
 {
@@ -44,11 +54,10 @@ int	is_player_path_correct(t_map *map, int px, int py)
 	copy = copy_grid(map->grid, map->height);
 	if (!copy)
 		return (0);
-	valid = flood_fill(px, py, copy, map->height);
+	valid = flood_fill(copy, px, py, map->height);
 	free_grid(copy);
 	return (valid);
 }
-
 
 char	**copy_grid(char **grid, int height)
 {
@@ -73,17 +82,4 @@ char	**copy_grid(char **grid, int height)
 	}
 	copy[i] = NULL;
 	return (copy);
-}
-
-void	free_grid(char **grid)
-{
-	int	i;
-
-    i = 0;
-	while (grid[i])
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
 }

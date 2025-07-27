@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:38:03 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 15:00:41 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:13:50 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int ac, char **argv)
 	}
 	if (check_valid_map(argv[1]))
     {
-        free_all(&data);
+        // free_all(&data);
 		return (1);
     }
     init_map(&map);
