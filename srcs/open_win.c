@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/24 20:27:08 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:33:00 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void load_texture(t_data *data, t_texture *tex, char *path)
     if (!tex->img)
     {
         fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
+        free_data(data);
         exit(1);
     }
     tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len, &tex->endian);
@@ -28,12 +29,21 @@ void init_window(t_data *game, char *map_file)
 {
     game->mlx_ptr = mlx_init();
     if (!game->mlx_ptr)
+    {
+        free_data(game);
         exit(1);
+    }
     game->win_ptr = mlx_new_window(game->mlx_ptr, game->width, game->height, "Cub3D");
     if (!game->win_ptr)
+    {
+        free_data(game);
         exit(1);
+    }
     if (parse_map(map_file, game))
+    {
+        free_data(game);
         exit(1);
+    }
     init_player(game);
     game->img_ptr = mlx_new_image(game->mlx_ptr, game->width, game->height);
     game->img_data = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->line_len, &game->endian);

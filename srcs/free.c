@@ -6,37 +6,40 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:42:44 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 14:59:35 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:28:49 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void free_all(t_data *data)
+void	free_all(t_data *game)
 {
-    int i;
+	if (!game)
+		return;
 
-    if (data->north.img)
-        mlx_destroy_image(data->mlx_ptr, data->north.img);
-    if (data->south.img)
-        mlx_destroy_image(data->mlx_ptr, data->south.img);
-    if (data->east.img)
-        mlx_destroy_image(data->mlx_ptr, data->east.img);
-    if (data->west.img)
-        mlx_destroy_image(data->mlx_ptr, data->west.img);
-    if (data->img_ptr)
-        mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-    if (data->win_ptr)
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-    i = 0; 
-    if (data->map_data.grid)
-    {
-        while(data->map_data.grid[i])
-            free(data->map_data.grid[i++]);
-        free(data->map_data.grid);
-    }
-    free(data->n_path);
-    free(data->s_path);
-    free(data->e_path);
-    free(data->w_path);
+	free_data(game); // free textures, map, image, window, paths, etc.
+
+	free(game); 
+}
+
+
+void free_textures(t_data *data)
+{
+	if (data->north.img)
+		mlx_destroy_image(data->mlx_ptr, data->north.img);
+	if (data->south.img)
+		mlx_destroy_image(data->mlx_ptr, data->south.img);
+	if (data->east.img)
+		mlx_destroy_image(data->mlx_ptr, data->east.img);
+	if (data->west.img)
+		mlx_destroy_image(data->mlx_ptr, data->west.img);
+}
+
+int clean_exit(t_data *data, char *error_msg, int code)
+{
+	if (error_msg)
+		ft_putstr_fd(error_msg, 2);
+	free_data(data);
+	exit(code);
+	return (code);
 }

@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 14:24:01 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:11:17 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ int	flood_fill(int x, int y, char **grid, int height);
 int	is_player_path_correct(t_map *map, int px, int py);
 char	**copy_grid(char **grid, int height);
 void	free_grid(char **grid);
-
+void free_textures(t_data *data);
+int clean_exit(t_data *data, char *error_msg, int code);
 #endif

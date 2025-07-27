@@ -6,11 +6,12 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 14:55:16 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:03:25 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 int	exit_with_error(char *msg, char *line, int fd)
 {
 	ft_putstr_fd(msg, 2);

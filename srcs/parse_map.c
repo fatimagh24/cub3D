@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 14:39:56 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/27 16:09:35 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ int    parse_map(char *map_name, t_data *data)
 			{
 				free(line);
 				close(fd);
-				free_first(data);
-				return (1);
+				return (clean_exit(data, "Error parsing texture\n", 1));
 			}
 		}
 		free(line);
