@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:38:03 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:12:16 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:56:11 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int main(int ac, char **argv)
 	}
 	if (check_valid_map(argv[1]))
     {
-        destroy_game(&data);
 		return (1);
     }
     init_map(&map);

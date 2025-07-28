@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/28 10:12:54 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:34:44 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void init_window(t_data *game, char *map_file)
     game->mlx_ptr = mlx_init();
     if (!game->mlx_ptr)
     {
-        destroy_game(game);
         exit(1);
     }
     game->win_ptr = mlx_new_window(game->mlx_ptr, game->width, game->height, "Cub3D");
     if (!game->win_ptr)
     {
-        destroy_game(game);
+        mlx_destroy_display(game->mlx_ptr);
+        free(game->mlx_ptr);
         exit(1);
     }
     if (parse_map(map_file, game))

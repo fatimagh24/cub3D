@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:45:51 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 11:06:43 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ int	check_valid_map(char *map_name)
 	{
 		if (check_line_content(line, &s, fd) == 1)
 		{
-			free(line);
+			if (line)
+			{
+				free(line);
+				line = NULL;
+			}
 			close(fd);
 			return (1);
 		}
@@ -80,8 +84,6 @@ int	check_valid_map(char *map_name)
 	if (line)
 		free(line);
 	close(fd);
-	// if (s.no != 1 || s.so != 1 || s.we != 1 || s.ea != 1 || s.f != 1 || s.c != 1)
-	// 	return (exit_with_error("Error: Missing or duplicate configuration lines\n", line, -1));
 	return (0);
 }
 

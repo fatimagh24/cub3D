@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:06:14 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:46:29 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	check_colors(char **rgb);
 int check_digit_color(char **rgb);
 void	find_player(t_data *data);
 int	is_map(const char *line);
-void copy_map_grid(t_data *data, int start, int total);
+int copy_map_grid(t_data *data, int start, int total);
 int	flood_fill(char **grid, int x, int y, int height);
 int	is_player_path_correct(t_map *map, int px, int py);
 char	**copy_grid(char **grid, int height);

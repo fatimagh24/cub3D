@@ -6,20 +6,20 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:08:22 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:49:16 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void copy_map_grid(t_data *data, int start, int total)
+int  copy_map_grid(t_data *data, int start, int total)
 {
 	int	i;
 	int len;
 
 	data->map_data.grid = malloc(sizeof(char *) * (total - start + 1));
 	if (!data->map_data.grid)
-		return;
+		return(1);
 	i = 0;
 	len = 0;
 	while (start < total)
@@ -36,16 +36,17 @@ void copy_map_grid(t_data *data, int start, int total)
 	fix_map(data->map_data.grid);
 	if (has_single_player(data->map_data.grid) == 1)
 	{
-		destroy_game(data);
-		exit(1);
+		//destroy_game(data);
+		return (1);
 	}
 	if (check_map(data->map_data.grid, &data->map_data) == 1)
 	{
-		destroy_game(data);
-		return ;
+		//destroy_game(data);
+		return (1);
 		// exit(1);
 	}
 	find_player(data);
+	return (0);
 }
 
 int	is_map(const char *line)
