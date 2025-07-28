@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:07:21 by fghanem           #+#    #+#             */
-/*   Updated: 2025/01/30 12:09:58 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:05:58 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ long	ft_atol(char *s);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 char	*ft_strchr_gnl(const char *s, int c);
 char	*get_next_line(int fd);
+void	cleanup_get_next_line(void);
 size_t	ft_strlen_gnl(const char *s);
 char	*get_final_line(char **stash, char *line);
 char	*read_char(int fd, char *stash);

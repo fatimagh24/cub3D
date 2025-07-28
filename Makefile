@@ -8,9 +8,11 @@ MLX_LIB = -L $(MLX_PATH) -lmlx -lXext -lX11
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-src= free.c parse_map.c error_checking.c \
-	clean_map.c main.c open_win.c render.c \
-	movement_utils.c hooks.c initialize.c error_check_two.c fill_map.c check_player_path.c\
+src= free.c parse_map.c error_checking.c\
+	clean_map.c main.c open_win.c render.c\
+	movement_utils.c hooks.c initialize.c error_check_two.c\
+	fill_map.c check_player_path.c raycasting.c raycast_utils.c\
+	init_player.c\
 
 SRC_DIR = srcs
 OBJ_DIR = obj

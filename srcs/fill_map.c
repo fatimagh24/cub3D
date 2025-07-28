@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:49:16 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:00:54 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int  copy_map_grid(t_data *data, int start, int total)
 	fix_map(data->map_data.grid);
 	if (has_single_player(data->map_data.grid) == 1)
 	{
-		//destroy_game(data);
 		return (1);
 	}
 	if (check_map(data->map_data.grid, &data->map_data) == 1)
 	{
-		//destroy_game(data);
 		return (1);
-		// exit(1);
 	}
 	find_player(data);
 	return (0);

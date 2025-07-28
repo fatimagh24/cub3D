@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:38:03 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:56:11 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:07:44 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int ac, char **argv)
     t_data data;
     t_map   map;
 
-    if (ac != 2 || ac < 2)
+    if (ac != 2)
     {
         ft_putstr_fd("Usage: ./cub3d map.cub\n", 2);
         return (1);
@@ -29,6 +29,7 @@ int main(int ac, char **argv)
 	}
 	if (check_valid_map(argv[1]))
     {
+        cleanup_get_next_line();
 		return (1);
     }
     init_map(&map);

@@ -6,11 +6,13 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:45:50 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 11:08:58 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:06:42 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*stash = NULL;
 
 char	*get_final_line(char **stash, char *line)
 {
@@ -35,11 +37,16 @@ char	*get_final_line(char **stash, char *line)
 	}
 	else
 	{
-		free(newline_pos);
+		if (*stash)
+		{
+			free(*stash);
+			*stash = NULL;
+		}
 		*stash = ft_strdup_gnl("");
 		return (line);
 	}
 }
+
 
 char	*read_char(int fd, char *stash)
 {
@@ -71,7 +78,6 @@ char	*read_char(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash = NULL;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -86,11 +92,19 @@ char	*get_next_line(int fd)
 	line = get_final_line(&stash, stash);
 	if (!line)
 	{
-		free(stash);
+		if(stash)
+			free(stash);
 		stash = NULL;
 		return (NULL);
 	}
-	free(stash);
-	stash = NULL;
 	return (line);
+}
+
+void	cleanup_get_next_line(void)
+{
+	if (stash)
+	{
+		free(stash);
+		stash = NULL;
+	}
 }
