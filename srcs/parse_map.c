@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:52:00 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:48:52 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	parse_texture(t_data *data, char *line)
 	else if (!ft_strncmp(line, "F ", 2))
 	{
 		if (parse_color(&data->floor_color, line + 2) == 1)
-			return (1);
+			return (2);
 	}
 	else if (!ft_strncmp(line, "C ", 2))
 	{
 		if (parse_color(&data->ceiling_color, line + 2))
-			return (1);
+			return (2);
 	}
 	return (0);
 }
@@ -80,22 +80,25 @@ int    parse_map(char *map_name, t_data *data)
 			map_start = i;
 		if (map_start == -1)
 		{
-			if (parse_texture(data, line) == 1)
+			if (parse_texture(data, line) == 2)
 			{
 				free(line);
+				free(data->map[i]);
+				data->map[i] = NULL;
 				close(fd);
-				return (1);
+				return (2);
 			}
 		}
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	free(line);
     data->map[i] = NULL;
     close(fd);
     if (map_start >= 0)
 	{
-		if(copy_map_grid(data, map_start, i))
+		if (copy_map_grid(data, map_start, i))
 			return (1);
 		if (!is_player_path_correct(&data->map_data, data->map_data.player_x, data->map_data.player_y))
 		{

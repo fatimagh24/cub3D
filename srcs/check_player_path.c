@@ -6,7 +6,7 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:42:19 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:32:26 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:09:19 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static int	is_walkable(char c)
 
 static int	is_out_of_bounds(int x, int y, char **grid, int height)
 {
+	int	len;
+
 	if (y < 0 || y >= height)
 		return (1);
-	if (x < 0 || x >= (int)strlen(grid[y]))
+	len = (int)ft_strlen(grid[y]);
+	if (x < 0 || x >= len || grid[y][x] == '\0' || grid[y][x] == '\n')
 		return (1);
 	return (0);
 }
@@ -49,7 +52,7 @@ int	flood_fill(char **grid, int x, int y, int height)
 int	is_player_path_correct(t_map *map, int px, int py)
 {
 	char	**copy;
-	int		valid;
+	int		valid ;
 
 	copy = copy_grid(map->grid, map->height);
 	if (!copy)

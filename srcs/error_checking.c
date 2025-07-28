@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_checking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 11:06:43 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:02:23 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_line_content(char *line, t_config_state *s, int fd)
 		s->f++;
 	else if (ft_strncmp(line, "C ", 2) == 0)
 		s->c++;
-	else if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
+	else if (line[0] == '1' || line[0] == '0' || line[0] == ' ' || line[0] == '\t')
 	{
 		if (s->no != 1 || s->so != 1 || s->we != 1 || s->ea != 1
 			|| s->f != 1 || s->c != 1)

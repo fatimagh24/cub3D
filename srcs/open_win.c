@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/28 10:34:44 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:24:20 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,19 @@ void init_window(t_data *game, char *map_file)
         free(game->mlx_ptr);
         exit(1);
     }
-    if (parse_map(map_file, game))
+    int err_f = parse_map(map_file, game);
+    if (err_f != 0)
     {
-        destroy_game(game);
-        exit(1);
+        if (err_f == 1)
+        {
+            destroy_game(game);
+            exit(1);
+        }
+        else if (err_f == 2)
+        {
+            destroy_game_first(game);
+            exit(1);
+        }
     }
     init_player(game);
     game->img_ptr = mlx_new_image(game->mlx_ptr, game->width, game->height);

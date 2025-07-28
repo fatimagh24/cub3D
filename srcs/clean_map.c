@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 13:07:40 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 10:06:24 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:10:18 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ void    clean_array(char **arr)
 
 
 
-// void	free_first(t_data *data)
-// {
-// 	if (data->n_path)
-// 		free(data->n_path);
-// 	if (data->s_path)
-// 		free(data->s_path);
-// 	if (data->w_path)
-// 		free(data->w_path);
-// 	if (data->e_path)
-// 		free(data->e_path);
-// 	free(data->map);
-// 	free_map(&data->map_data);
-// }
+void	free_first(t_data *data)
+{
+	if (data->n_path)
+		free(data->n_path);
+	if (data->s_path)
+		free(data->s_path);
+	if (data->w_path)
+		free(data->w_path);
+	if (data->e_path)
+		free(data->e_path);
+	free(data->map);
+	// free_map(&data->map_data);
+}
 
 // void	free_map(t_map *map)
 // {
