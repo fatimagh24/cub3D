@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 16:33:00 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:12:54 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void load_texture(t_data *data, t_texture *tex, char *path)
 {
-    printf("Loading texture from: '%s'\n", path);
     tex->img = mlx_xpm_file_to_image(data->mlx_ptr, path, &tex->width, &tex->height);
     if (!tex->img)
     {
         fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
-        free_data(data);
+        destroy_game(data);
         exit(1);
     }
     tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len, &tex->endian);
@@ -30,18 +29,18 @@ void init_window(t_data *game, char *map_file)
     game->mlx_ptr = mlx_init();
     if (!game->mlx_ptr)
     {
-        free_data(game);
+        destroy_game(game);
         exit(1);
     }
     game->win_ptr = mlx_new_window(game->mlx_ptr, game->width, game->height, "Cub3D");
     if (!game->win_ptr)
     {
-        free_data(game);
+        destroy_game(game);
         exit(1);
     }
     if (parse_map(map_file, game))
     {
-        free_data(game);
+        destroy_game(game);
         exit(1);
     }
     init_player(game);

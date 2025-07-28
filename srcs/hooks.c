@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:15:22 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/27 17:02:40 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:08:50 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int close_window(void *param)
     t_data *data;
 
     data = (t_data *)param;
-    free_all(data);
-    //clean_exit(data, "Window closed by user\n", 0);
+	destroy_game(data);
     exit(0);
     return (0);
 }
@@ -75,7 +74,6 @@ int	mouse_move(int x, int y, void *param)
 		game->mouse_captured = 1;
 		return (0);
 	}
-
 	delta_x = x - game->last_mouse_x;
 	rotation_angle = delta_x * MOUSE_SENSITIVITY;
 	if (rotation_angle != 0)

@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:38:11 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:06:14 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void init_window(t_data *game, char *map_file);
 void init_player(t_data *data);
 int render_frame(t_data *data);
 void load_texture(t_data *data, t_texture *tex, char *path);
-void free_all(t_data *data);
+//void free_all(t_data *data);
 int    parse_map(char *map_name, t_data *data);
 void init_data(t_data *data, t_map *map);
 void    init_map(t_map *map);
@@ -115,7 +115,7 @@ int	check_valid_map(char *map_name);
 // void	check_valid_map(const char *map_name);
 int     check_map(char **grid, t_map *map);
 void    clean_array(char **arr);
-void	free_data(t_data *data);
+//void	free_data(t_data *data);
 int	has_single_player(char **map);
 void move_left(t_data *data, double speed);
 void move_right(t_data *data, double speed);
@@ -123,10 +123,10 @@ void move_backward(t_data *data, double speed);
 void move_forward(t_data *data, double speed);
 void rotate_player(t_data *player, double angle);
 int	mouse_move(int x, int y, void *param);
-void	free_first(t_data *data);
+//void	free_first(t_data *data);
 void	fix_map(char **temp);
 int	check_colors(char **rgb);
-void	free_map(t_map *map);
+//void	free_map(t_map *map);
 int check_digit_color(char **rgb);
 void	find_player(t_data *data);
 int	is_map(const char *line);
@@ -136,5 +136,6 @@ int	is_player_path_correct(t_map *map, int px, int py);
 char	**copy_grid(char **grid, int height);
 void	free_grid(char **grid);
 void free_textures(t_data *data);
-int clean_exit(t_data *data, char *error_msg, int code);
+//int clean_exit(t_data *data, char *error_msg, int code);
+void	destroy_game(t_data *data);
 #endif

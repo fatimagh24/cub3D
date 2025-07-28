@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:37:02 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 10:11:23 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int    parse_map(char *map_name, t_data *data)
 			{
 				free(line);
 				close(fd);
-				return (clean_exit(data, "Error parsing texture\n", 1));
+				destroy_game(data);
+				return (1);
 			}
 		}
 		free(line);
@@ -97,7 +98,7 @@ int    parse_map(char *map_name, t_data *data)
 		copy_map_grid(data, map_start, i);
 	if (!is_player_path_correct(&data->map_data, data->map_data.player_x, data->map_data.player_y))
 	{
-		free_data(data);
+		destroy_game(data);
 		ft_putstr_fd("Error: Player has invalid path!\n", 2);
 		return (1);
 	}

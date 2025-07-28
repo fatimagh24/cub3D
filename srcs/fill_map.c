@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/27 16:30:20 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/28 10:08:22 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void copy_map_grid(t_data *data, int start, int total)
 	fix_map(data->map_data.grid);
 	if (has_single_player(data->map_data.grid) == 1)
 	{
-		free_data(data);
+		destroy_game(data);
 		exit(1);
 	}
 	if (check_map(data->map_data.grid, &data->map_data) == 1)
 	{
-		free_data(data);
-		free_all(data);
+		destroy_game(data);
 		return ;
 		// exit(1);
 	}
