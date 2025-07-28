@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:26:14 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:55:15 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	check_valid_map(char *map_name)
 	{
 		if (check_line_content(line, &s, fd) == 1)
 		{
+			free(line);
 			close(fd);
 			return (1);
 		}

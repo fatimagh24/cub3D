@@ -6,14 +6,19 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:45:50 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:41:36 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:56:14 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "libft.h"
 
-static char	*stash = NULL;
+static char	**stash_holder(void)
+{
+	static char	*stash = NULL;
+	return (&stash);
+}
+
 
 char	*get_final_line(char **stash, char *line)
 {
@@ -76,32 +81,33 @@ char	*read_char(int fd, char *stash)
 char	*get_next_line(int fd)
 {
 	char		*line;
+	char		**stash_ptr = stash_holder();
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stash)
-		stash = ft_strdup_gnl("");
-	stash = read_char(fd, stash);
-	if (!stash)
-	{
+	if (!*stash_ptr)
+		*stash_ptr = ft_strdup_gnl("");
+	*stash_ptr = read_char(fd, *stash_ptr);
+	if (!*stash_ptr)
 		return (NULL);
-	}
-	line = get_final_line(&stash, stash);
+	line = get_final_line(stash_ptr, *stash_ptr);
 	if (!line)
 	{
-		if(stash)
-			free(stash);
-		stash = NULL;
+		free(*stash_ptr);
+		*stash_ptr = NULL;
 		return (NULL);
 	}
 	return (line);
 }
 
+
 void	cleanup_get_next_line(void)
 {
-	if (stash)
+	char	**stash_ptr = stash_holder();
+
+	if (*stash_ptr)
 	{
-		free(stash);
-		stash = NULL;
+		free(*stash_ptr);
+		*stash_ptr = NULL;
 	}
 }
