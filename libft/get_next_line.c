@@ -6,9 +6,10 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:45:50 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:06:42 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:41:36 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 
@@ -37,11 +38,7 @@ char	*get_final_line(char **stash, char *line)
 	}
 	else
 	{
-		if (*stash)
-		{
-			free(*stash);
-			*stash = NULL;
-		}
+		free(newline_pos);
 		*stash = ft_strdup_gnl("");
 		return (line);
 	}

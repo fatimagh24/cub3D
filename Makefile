@@ -27,7 +27,7 @@ all: $(NAME)
 $(LIBFT) :
 		@$(MAKE) -C $(LIBFT_DIR) all
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) | libft
 	$(CC) $(CFLAGS) -I $(INCLUDES) -lm $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME)
 
 

@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:07:39 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:26:14 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	exit_with_error(char *msg, char *line, int fd)
 {
-	if (line)
-		free(line);
+	(void)line;
+	// if (line)
+	// 	free(line);
 	ft_putstr_fd(msg, 2);
 	if (fd >= 0)
 		close(fd);
@@ -70,7 +71,10 @@ int	check_valid_map(char *map_name)
 	while (line)
 	{
 		if (check_line_content(line, &s, fd) == 1)
+		{
+			close(fd);
 			return (1);
+		}
 		free(line);
 		line = get_next_line(fd);
 	}

@@ -6,9 +6,10 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 13:40:49 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:16:14 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -152,4 +153,5 @@ void choose_texture(t_data *data, t_ray *ray);
 void draw_vertical_line(t_data *data, t_ray *ray, int x);
 void raycasting(t_data *data);
 void put_pixel(t_data *data, int x, int y, int color);
+void	destroy_game_first(t_data *data);
 #endif
