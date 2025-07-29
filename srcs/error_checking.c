@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:55:15 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 10:10:22 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	exit_with_error(char *msg, char *line, int fd)
 {
 	(void)line;
-	// if (line)
-	// 	free(line);
 	ft_putstr_fd(msg, 2);
 	if (fd >= 0)
 		close(fd);
@@ -50,20 +48,23 @@ int	check_line_content(char *line, t_config_state *s, int fd)
 		return (exit_with_error("Error: Invalid line before map section\n", line, fd));
 	return (0);
 }
-
+static void init_config_state(t_config_state *s)
+{
+	s->no = 0;
+	s->so = 0;
+	s->we = 0;
+	s->ea = 0;
+	s->f = 0;
+	s->c = 0;
+	s->config_done = 0;
+}
 int	check_valid_map(char *map_name)
 {
 	int				fd;
 	char			*line;
 	t_config_state	s;
 
-	s.no = 0;
-	s.so = 0;
-	s.we = 0;
-	s.ea = 0;
-	s.f = 0;
-	s.c = 0;
-	s.config_done = 0;
+	init_config_state(&s);
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 		return (exit_with_error("Error opening map file\n", NULL, -1));

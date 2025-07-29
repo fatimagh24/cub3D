@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:37:10 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 10:40:45 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,61 +56,64 @@ int	parse_texture(t_data *data, char *line)
 	return (0);
 }
 
-int    parse_map(char *map_name, t_data *data)
+static int load_map_lines(int fd, t_data *data, int *map_start, int *i)
 {
-    int fd;
-    char *line;
-    int i;
-    int line_count;
-    int map_start;
+	char *line;
 
-    i = 0;
-    line_count = 0;
-    map_start = -1;
-    fd = open(map_name, O_RDONLY);
-    if (fd < 0)
-    {
-        ft_putstr_fd("Error opening file", 2);
-        return (1);
-    }
 	line = get_next_line(fd);
-    while (line)
+	while (line)
 	{
-		data->map[i] = ft_strdup(line);
-		if (is_map(line) && map_start == -1)
-			map_start = i;
-		if (map_start == -1)
+		data->map[*i] = ft_strdup(line);
+		if (is_map(line) && *map_start == -1)
+			*map_start = *i;
+		if (*map_start == -1 && parse_texture(data, line) == 2)
 		{
-			if (parse_texture(data, line) == 2)
-			{
-				free(line);
-				free(data->map[i]);
-				data->map[i] = NULL;
-				close(fd);
-				return (2);
-			}
+			free(line);
+			free(data->map[*i]);
+			data->map[*i] = NULL;
+			return (2);
 		}
 		free(line);
 		line = get_next_line(fd);
-		i++;
+		(*i)++;
 	}
-	// free(line);
-    data->map[i] = NULL;
-    close(fd);
-    if (map_start >= 0)
+	data->map[*i] = NULL;
+	return (0);
+}
+
+static int validate_map_data(t_data *data, int map_start, int line_count)
+{
+	if (copy_map_grid(data, map_start, line_count))
+		return (1);
+	if (!is_player_path_correct(&data->map_data,
+		data->map_data.player_x, data->map_data.player_y))
 	{
-		if (copy_map_grid(data, map_start, i))
-			return (1);
-		if (!is_player_path_correct(&data->map_data, data->map_data.player_x, data->map_data.player_y))
-		{
-			ft_putstr_fd("Error: Player has invalid path!\n", 2);
-			return (1);
-		}
+		ft_putstr_fd("Error: Player has invalid path!\n", 2);
+		return (1);
 	}
-	else
+	return (0);
+}
+int parse_map(char *map_name, t_data *data)
+{
+	int fd;
+	int i = 0;
+	int map_start = -1;
+	int result;
+
+	fd = open(map_name, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error opening file\n", 2);
+		return (1);
+	}
+	result = load_map_lines(fd, data, &map_start, &i);
+	close(fd);
+	if (result != 0)
+		return (result);
+	if (map_start < 0)
 	{
 		ft_putstr_fd("Error: No map found in the file\n", 2);
 		return (1);
 	}
-	return (0);
+	return validate_map_data(data, map_start, i);
 }

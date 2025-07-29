@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:24:10 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/28 13:21:00 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 10:41:09 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ int render_frame(t_data *data)
     draw_floor(data);
     raycasting(data);
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-    return 0;
+    return (0);
 }

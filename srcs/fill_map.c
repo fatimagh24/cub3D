@@ -6,12 +6,20 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 13:00:54 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 10:42:50 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+static int is_valid_map(t_data *data)
+{
+	if (has_single_player(data->map_data.grid))
+		return (1);
+	if (check_map(data->map_data.grid, &data->map_data))
+		return (1);
+	return (0);
+}
 int  copy_map_grid(t_data *data, int start, int total)
 {
 	int	i;
@@ -34,14 +42,8 @@ int  copy_map_grid(t_data *data, int start, int total)
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
 	fix_map(data->map_data.grid);
-	if (has_single_player(data->map_data.grid) == 1)
-	{
+	if(is_valid_map(data))
 		return (1);
-	}
-	if (check_map(data->map_data.grid, &data->map_data) == 1)
-	{
-		return (1);
-	}
 	find_player(data);
 	return (0);
 }
