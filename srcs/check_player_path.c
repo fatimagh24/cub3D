@@ -6,16 +6,16 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:42:19 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 12:14:10 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 16:50:42 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	is_walkable(char c)
-{
-	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
+// static int	is_walkable(char c)
+// {
+// 	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+// }
 
 static int	is_out_of_bounds(int x, int y, char **grid, int height)
 {
@@ -35,8 +35,8 @@ int	flood_fill(char **grid, int x, int y, int height)
 		return (1);
 	if (grid[y][x] == ' ' || grid[y][x] == '\n')
 		return (1);
-	if (!is_walkable(grid[y][x]))
-		return (0);
+	// if (!is_walkable(grid[y][x]))
+	// 	return (0);
 	grid[y][x] = 'x';
 	if (flood_fill(grid, x + 1, y, height))
 		return (1);
