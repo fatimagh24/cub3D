@@ -6,18 +6,17 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 10:40:45 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 12:36:12 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/cub3d.h"
 
 int	parse_color(t_color *color, char *line)
 {
-	char **rgb;
-    
-    rgb = ft_split(line, ',');
+	char	**rgb;
+
+	rgb = ft_split(line, ',');
 	if (check_colors(rgb) == 1)
 	{
 		ft_putstr_fd("Invalid color\n", 2);
@@ -27,7 +26,7 @@ int	parse_color(t_color *color, char *line)
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
-    clean_array(rgb);
+	clean_array(rgb);
 	return (0);
 }
 
@@ -56,9 +55,9 @@ int	parse_texture(t_data *data, char *line)
 	return (0);
 }
 
-static int load_map_lines(int fd, t_data *data, int *map_start, int *i)
+static int	load_map_lines(int fd, t_data *data, int *map_start, int *i)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	while (line)
@@ -81,25 +80,28 @@ static int load_map_lines(int fd, t_data *data, int *map_start, int *i)
 	return (0);
 }
 
-static int validate_map_data(t_data *data, int map_start, int line_count)
+static int	validate_map_data(t_data *data, int map_start, int line_count)
 {
 	if (copy_map_grid(data, map_start, line_count))
 		return (1);
 	if (!is_player_path_correct(&data->map_data,
-		data->map_data.player_x, data->map_data.player_y))
+			data->map_data.player_x, data->map_data.player_y))
 	{
 		ft_putstr_fd("Error: Player has invalid path!\n", 2);
 		return (1);
 	}
 	return (0);
 }
-int parse_map(char *map_name, t_data *data)
-{
-	int fd;
-	int i = 0;
-	int map_start = -1;
-	int result;
 
+int	parse_map(char *map_name, t_data *data)
+{
+	int	fd;
+	int	i;
+	int	map_start;
+	int	result;
+
+	i = 0;
+	map_start = -1;
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
@@ -115,5 +117,5 @@ int parse_map(char *map_name, t_data *data)
 		ft_putstr_fd("Error: No map found in the file\n", 2);
 		return (1);
 	}
-	return validate_map_data(data, map_start, i);
+	return (validate_map_data(data, map_start, i));
 }

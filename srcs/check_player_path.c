@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_player_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:42:19 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:09:19 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/29 12:14:10 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h" 
+#include "../includes/cub3d.h"
 
 static int	is_walkable(char c)
 {
@@ -46,13 +46,13 @@ int	flood_fill(char **grid, int x, int y, int height)
 		return (1);
 	if (flood_fill(grid, x, y - 1, height))
 		return (1);
-	return (0); 
+	return (0);
 }
 
 int	is_player_path_correct(t_map *map, int px, int py)
 {
 	char	**copy;
-	int		valid ;
+	int		valid;
 
 	copy = copy_grid(map->grid, map->height);
 	if (!copy)

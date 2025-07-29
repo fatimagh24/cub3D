@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 11:14:53 by fghanem           #+#    #+#             */
-/*   Updated: 2024/09/09 17:37:02 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/07/29 13:31:31 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 
 #include "libft.h"
 
@@ -73,7 +72,7 @@ static size_t	ft_nlen(long n)
 	{
 		len++;
 		n /= 10;
-	}	
+	}
 	return (len);
 }
 /*

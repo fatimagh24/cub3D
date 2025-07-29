@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/cub3d.h"
 
-void free_textures(t_data *data)
+void	free_textures(t_data *data)
 {
 	if (data->north.img)
 		mlx_destroy_image(data->mlx_ptr, data->north.img);
@@ -49,12 +48,14 @@ void	destroy_game(t_data *data)
 
 void	destroy_game_first(t_data *data)
 {
+	int	i;
+
 	free_textures(data);
 	if (data->img_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	int i = 0;
+	i = 0;
 	while (data->map[i])
 	{
 		if (data->map[i])

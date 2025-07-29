@@ -6,33 +6,35 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/29 10:25:52 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 13:29:48 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/cub3d.h"
 
-#include"../includes/cub3d.h"
-
-static void load_texture(t_data *data, t_texture *tex, char *path)
+static void	load_texture(t_data *data, t_texture *tex, char *path)
 {
-    tex->img = mlx_xpm_file_to_image(data->mlx_ptr, path, &tex->width, &tex->height);
-    if (!tex->img)
-    {
-        fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
-        destroy_game(data);
-        exit(1);
-    }
-    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len, &tex->endian);
+	tex->img = mlx_xpm_file_to_image(data->mlx_ptr, path, &tex->width,
+			&tex->height);
+	if (!tex->img)
+	{
+		fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
+		destroy_game(data);
+		exit(1);
+	}
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,
+			&tex->endian);
 }
 
-static void load_all_textures(t_data *data)
+static void	load_all_textures(t_data *data)
 {
-    load_texture(data, &data->north, data->n_path);
-    load_texture(data, &data->south, data->s_path);
-    load_texture(data, &data->east, data->e_path);
-    load_texture(data, &data->west, data->w_path);
+	load_texture(data, &data->north, data->n_path);
+	load_texture(data, &data->south, data->s_path);
+	load_texture(data, &data->east, data->e_path);
+	load_texture(data, &data->west, data->w_path);
 }
-static void handle_parsing_error(int return_parse, t_data *game)
+
+static void	handle_parsing_error(int return_parse, t_data *game)
 {
 	if (return_parse == 1)
 	{
@@ -46,30 +48,38 @@ static void handle_parsing_error(int return_parse, t_data *game)
 		exit(1);
 	}
 }
-void init_window(t_data *game, char *map_file)
-{
-    int return_parse;
 
-    game->mlx_ptr = mlx_init();
-    if (!game->mlx_ptr)
-        exit(1);
-    game->win_ptr = mlx_new_window(game->mlx_ptr, game->width, game->height, "Cub3D");
-    if (!game->win_ptr)
-    {
-        mlx_destroy_display(game->mlx_ptr);
-        free(game->mlx_ptr);
-        exit(1);
-    }
-    return_parse = parse_map(map_file, game);
-    if (return_parse != 0)
-        handle_parsing_error(return_parse, game);
-    init_player(game);
-    game->img_ptr = mlx_new_image(game->mlx_ptr, game->width, game->height);
-    game->img_data = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->line_len, &game->endian);
-    load_all_textures(game);
-    mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
-    mlx_hook(game->win_ptr, 17, 0, close_window, game);
-    mlx_loop_hook(game->mlx_ptr, render_frame, game);
-    mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
-    mlx_loop(game->mlx_ptr);
+static void	init_hooks_and_loop(t_data *game)
+{
+	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win_ptr, 17, 0, close_window, game);
+	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
+	mlx_loop_hook(game->mlx_ptr, render_frame, game);
+	mlx_loop(game->mlx_ptr);
+}
+
+void	init_window(t_data *game, char *map_file)
+{
+	int	return_parse;
+
+	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		exit(1);
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width, game->height,
+			"Cub3D");
+	if (!game->win_ptr)
+	{
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+		exit(1);
+	}
+	return_parse = parse_map(map_file, game);
+	if (return_parse != 0)
+		handle_parsing_error(return_parse, game);
+	init_player(game);
+	game->img_ptr = mlx_new_image(game->mlx_ptr, game->width, game->height);
+	game->img_data = mlx_get_data_addr(game->img_ptr, &game->bpp,
+			&game->line_len, &game->endian);
+	load_all_textures(game);
+	init_hooks_and_loop(game);
 }

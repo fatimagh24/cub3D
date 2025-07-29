@@ -12,10 +12,9 @@
 
 #include "../includes/cub3d.h"
 
-
-void    clean_array(char **arr)
+void	clean_array(char **arr)
 {
-    int	i;
+	int	i;
 
 	if (!arr)
 		return ;
@@ -32,7 +31,7 @@ void	free_grid(char **grid)
 {
 	int	i;
 
-    i = 0;
+	i = 0;
 	while (grid[i])
 	{
 		free(grid[i]);

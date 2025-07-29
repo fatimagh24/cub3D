@@ -6,13 +6,13 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 10:42:50 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 12:28:52 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int is_valid_map(t_data *data)
+static int	is_valid_map(t_data *data)
 {
 	if (has_single_player(data->map_data.grid))
 		return (1);
@@ -20,14 +20,15 @@ static int is_valid_map(t_data *data)
 		return (1);
 	return (0);
 }
-int  copy_map_grid(t_data *data, int start, int total)
+
+int	copy_map_grid(t_data *data, int start, int total)
 {
 	int	i;
-	int len;
+	int	len;
 
 	data->map_data.grid = malloc(sizeof(char *) * (total - start + 1));
 	if (!data->map_data.grid)
-		return(1);
+		return (1);
 	i = 0;
 	len = 0;
 	while (start < total)
@@ -42,7 +43,7 @@ int  copy_map_grid(t_data *data, int start, int total)
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
 	fix_map(data->map_data.grid);
-	if(is_valid_map(data))
+	if (is_valid_map(data))
 		return (1);
 	find_player(data);
 	return (0);
@@ -52,20 +53,21 @@ int	is_map(const char *line)
 {
 	while (*line == ' ')
 		line++;
-    if (*line == '1' || *line == '0' || *line == ' ')
-        return (1);
-    return (0);
+	if (*line == '1' || *line == '0' || *line == ' ')
+		return (1);
+	return (0);
 }
 
 void	find_player(t_data *data)
 {
-	int	y;
-	char c; 
+	int		y;
+	char	c;
+	int		x;
 
 	y = 0;
 	while (data->map_data.grid[y])
 	{
-		int x = 0;
+		x = 0;
 		while (data->map_data.grid[y][x])
 		{
 			c = data->map_data.grid[y][x];
@@ -74,7 +76,7 @@ void	find_player(t_data *data)
 				data->map_data.player_x = x;
 				data->map_data.player_y = y;
 				data->map_data.player_dir = c;
-				return;
+				return ;
 			}
 			x++;
 		}

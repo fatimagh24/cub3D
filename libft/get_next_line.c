@@ -6,19 +6,25 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:45:50 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/28 14:56:14 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 13:40:54 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
 static char	**stash_holder(void)
 {
-	static char	*stash = NULL;
+	static char	*stash;
+
+	if (!stash)
+	{
+		stash = malloc(1);
+		if (!stash)
+			return (NULL);
+		stash[0] = '\0';
+	}
 	return (&stash);
 }
-
 
 char	*get_final_line(char **stash, char *line)
 {
@@ -48,7 +54,6 @@ char	*get_final_line(char **stash, char *line)
 		return (line);
 	}
 }
-
 
 char	*read_char(int fd, char *stash)
 {
@@ -81,8 +86,9 @@ char	*read_char(int fd, char *stash)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char		**stash_ptr = stash_holder();
+	char		**stash_ptr;
 
+	stash_ptr = stash_holder();
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!*stash_ptr)
@@ -100,11 +106,11 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-
 void	cleanup_get_next_line(void)
 {
-	char	**stash_ptr = stash_holder();
+	char	**stash_ptr;
 
+	stash_ptr = stash_holder();
 	if (*stash_ptr)
 	{
 		free(*stash_ptr);

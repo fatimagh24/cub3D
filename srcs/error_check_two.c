@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 10:07:38 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 12:28:38 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ int	check_colors(char **rgb)
 
 	i = 0;
 	while (rgb[i])
-    i++;
+		i++;
 	if (i != 3)
-        return (1);
-    if (check_digit_color(rgb) == 1)
-        return (1);
-    return (0);
+		return (1);
+	if (check_digit_color(rgb) == 1)
+		return (1);
+	return (0);
 }
 
-int check_digit_color(char **rgb)
+int	check_digit_color(char **rgb)
 {
-    int	i;
-    int	j;
-    int	val;
-    
-    i = 0;
-    val = 0;
+	int	i;
+	int	j;
+	int	val;
+
+	i = 0;
+	val = 0;
 	while (i < 3)
 	{
 		j = 0;
@@ -51,7 +51,7 @@ int check_digit_color(char **rgb)
 			return (1);
 		i++;
 	}
-    return (0);
+	return (0);
 }
 
 int	has_single_player(char **map)

@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 10:10:22 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/29 13:38:03 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,18 @@ int	check_line_content(char *line, t_config_state *s, int fd)
 		s->c++;
 	else if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
 	{
-		if (s->no != 1 || s->so != 1 || s->we != 1 || s->ea != 1
-			|| s->f != 1 || s->c != 1)
-			return (exit_with_error("Error: Missing or extra configers \n", line, fd));
+		if (s->no + s->so + s->we + s->ea + s->f + s->c != 6)
+			return (exit_with_error("Error: Missing or extra configers \n",
+					line, fd));
 		s->config_done = 1;
 	}
 	else if (!s->config_done)
-		return (exit_with_error("Error: Invalid line before map section\n", line, fd));
+		return (exit_with_error("Error: Invalid line before map section\n",
+				line, fd));
 	return (0);
 }
-static void init_config_state(t_config_state *s)
+
+static void	init_config_state(t_config_state *s)
 {
 	s->no = 0;
 	s->so = 0;
@@ -58,6 +60,7 @@ static void init_config_state(t_config_state *s)
 	s->c = 0;
 	s->config_done = 0;
 }
+
 int	check_valid_map(char *map_name)
 {
 	int				fd;
@@ -97,15 +100,16 @@ int	check_map(char **grid, t_map *map)
 		j = 0;
 		while (grid[i][j])
 		{
-			if (i == 0 || i == map->height - 1 || j == 0 || j == (int)(ft_strlen(grid[i]) - 1))
+			if (i == 0 || i == map->height - 1 || j == 0
+				|| j == (int)(ft_strlen(grid[i]) - 1))
 			{
-				while (grid[i][j] == ' ' ||  grid[i][j] == '\t' || grid[i][j] == '\v' || grid[i][j] == '\f' || grid[i][j] == '\r')
+				while (grid[i][j] == ' ' || grid[i][j] == '\t'
+					|| grid[i][j] == '\v' || grid[i][j] == '\f'
+					|| grid[i][j] == '\r')
 					j++;
-				if (grid[i][j] != '1' || (grid[i][j] != '1' || grid[i][ft_strlen(grid[i]) - 1] != '1'))
-				{
-					ft_putstr_fd("ERROR: INVALID WALL\n", 2);
-					return (1);
-				}
+				if (grid[i][j] != '1' || (grid[i][j] != '1'
+						|| grid[i][ft_strlen(grid[i]) - 1] != '1'))
+					return (ft_putstr_fd("ERROR: INVALID WALL\n", 2), 1);
 			}
 			j++;
 		}
