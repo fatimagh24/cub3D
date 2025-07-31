@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 17:16:38 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/07/31 10:19:08 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	has_single_player(char **map)
 	}
 	if (count != 1)
 	{
-		ft_putstr_fd("Error:Invalid map: incorrect number of
-				players or invalid characters\n", 2);
+		ft_putstr_fd("Error:Invalid map: incorrect number of "
+			"players or invalid characters\n", 2);
 		return (1);
 	}
 	return (0);
