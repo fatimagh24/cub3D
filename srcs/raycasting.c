@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:38:19 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/29 12:30:20 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/04 13:13:36 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ static void	init_ray(t_data *data, t_ray *ray, int x)
 	ray->ray_dir_y = data->dir_y + data->plane_y * ray->camera_x;
 	ray->map_x = (int)data->pos_x;
 	ray->map_y = (int)data->pos_y;
-	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
 static void	calc_step_and_side_dist(t_data *data, t_ray *ray)

@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:27:43 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 12:36:12 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 17:23:36 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static int	validate_map_data(t_data *data, int map_start, int line_count)
 {
 	if (copy_map_grid(data, map_start, line_count))
 		return (1);
-	if (!is_player_path_correct(&data->map_data,
-			data->map_data.player_x, data->map_data.player_y))
+	if ((is_player_path_correct(&data->map_data,
+				data->map_data.player_x, data->map_data.player_y)))
 	{
 		ft_putstr_fd("Error: Player has invalid path!\n", 2);
 		return (1);
@@ -117,5 +117,7 @@ int	parse_map(char *map_name, t_data *data)
 		ft_putstr_fd("Error: No map found in the file\n", 2);
 		return (1);
 	}
-	return (validate_map_data(data, map_start, i));
+	if (validate_map_data(data, map_start, i) == 1)
+		return (1);
+	return (0);
 }

@@ -10,7 +10,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 src= game_cleanup.c parse_map.c error_checking.c\
 	clean_map.c main.c open_win.c render.c\
-	movement_utils.c hooks.c initialize.c error_check_two.c\
+	movement_utils1.c movement_utils2.c hooks.c initialize.c error_check_two.c\
 	fill_map.c check_player_path.c raycasting.c raycast_utils.c\
 	init_player.c\
 

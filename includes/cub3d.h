@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 10:58:13 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 17:24:19 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <X11/X.h>
 
 # define MOUSE_SENSITIVITY 0.002
+# define TILE_SIZE 64
 
 typedef struct s_texture
 {
@@ -115,6 +117,12 @@ typedef struct s_data
 	char		*w_path;
 	int			last_mouse_x;
 	int			mouse_captured;
+	int move_forward;
+    int move_backward;
+    int move_left;
+    int move_right;
+    int rotate_left;
+    int rotate_right;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -138,6 +146,11 @@ int				is_map(const char *line);
 int				copy_map_grid(t_data *data, int start, int total);
 int				flood_fill(char **grid, int x, int y, int height);
 int				is_player_path_correct(t_map *map, int px, int py);
+int				is_walkable(t_data *data, double x, double y);
+int				key_press(int keycode, void *param);
+int				check_map_content(char **grid, int i);
+int key_release(int keycode, void *param);
+int				map_not_last(char **map);
 char			**copy_grid(char **grid, int height);
 void			free_grid(char **grid);
 void			free_textures(t_data *data);
@@ -159,7 +172,6 @@ void			rotate_player(t_data *player, double angle);
 void			init_data(t_data *data, t_map *map);
 void			init_map(t_map *map);
 void			clean_array(char **arr);
-int				key_press(int keycode, void *param);
 void			init_window(t_data *game, char *map_file);
 void			init_player(t_data *data);
 

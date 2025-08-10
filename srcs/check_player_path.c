@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:42:19 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/31 10:17:23 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 12:49:41 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_out_of_bounds(int x, int y, char **grid, int height)
 	if (y < 0 || y >= height)
 		return (1);
 	len = (int)ft_strlen(grid[y]);
-	if (x < 0 || x >= len || grid[y][x] == '\0' || grid[y][x] == '\n')
+	if (x < 0 || x >= len || grid[y][x] == '\0')
 		return (1);
 	return (0);
 }
@@ -28,16 +28,13 @@ int	flood_fill(char **grid, int x, int y, int height)
 {
 	if (is_out_of_bounds(x, y, grid, height))
 		return (1);
-	if (grid[y][x] == ' ' || grid[y][x] == '\n')
-		return (1);
+	if (grid[y][x] == '1' || grid[y][x] == 'x')
+		return (0);
 	grid[y][x] = 'x';
-	if (flood_fill(grid, x + 1, y, height))
-		return (1);
-	if (flood_fill(grid, x - 1, y, height))
-		return (1);
-	if (flood_fill(grid, x, y + 1, height))
-		return (1);
-	if (flood_fill(grid, x, y - 1, height))
+	if (flood_fill(grid, x + 1, y, height)
+		|| flood_fill(grid, x - 1, y, height)
+		|| flood_fill(grid, x, y + 1, height)
+		|| flood_fill(grid, x, y - 1, height))
 		return (1);
 	return (0);
 }
@@ -50,9 +47,12 @@ int	is_player_path_correct(t_map *map, int px, int py)
 	copy = copy_grid(map->grid, map->height);
 	if (!copy)
 		return (0);
+	valid = 0;
 	valid = flood_fill(copy, px, py, map->height);
 	free_grid(copy);
-	return (valid);
+	if (valid == 1)
+		return (1);
+	return (0);
 }
 
 char	**copy_grid(char **grid, int height)
@@ -78,4 +78,24 @@ char	**copy_grid(char **grid, int height)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+int	check_map_content(char **grid, int i)
+{
+	int	j;
+
+	while (grid[i])
+	{
+		j = 0;
+		while (grid[i][j])
+		{
+			if (grid[i][j] != '1' && grid[i][j] != '0' && grid[i][j] != ' '
+				&& grid[i][j] != 'S' && grid[i][j] != 'E'
+				&& grid[i][j] != 'N' && grid[i][j] != 'W' && grid[i][j] != '\t')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

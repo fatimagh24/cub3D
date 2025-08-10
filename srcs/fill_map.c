@@ -6,18 +6,33 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:29:48 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/29 12:28:52 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 17:21:39 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub3d.h"
 
 static int	is_valid_map(t_data *data)
 {
+	if (data->map_data.height <= 2)
+	{
+		ft_putstr_fd("Error: Map is too small\n", 2);
+		return (1);
+	}
+	if (map_not_last(data->map_data.grid) == 1)
+		return (1);
+	fix_map(data->map_data.grid);
 	if (has_single_player(data->map_data.grid))
 		return (1);
 	if (check_map(data->map_data.grid, &data->map_data))
 		return (1);
+	if (check_map_content(data->map_data.grid, 0))
+	{
+		ft_putstr_fd("Error: wrong char in map\n", 2);
+		return (1);
+	}
+	find_player(data);
 	return (0);
 }
 
@@ -34,6 +49,8 @@ int	copy_map_grid(t_data *data, int start, int total)
 	while (start < total)
 	{
 		data->map_data.grid[i] = ft_strdup(data->map[start]);
+		if (!data->map_data.grid[i])
+			return (1);
 		len = ft_strlen(data->map[start]);
 		if (len > data->map_data.width)
 			data->map_data.width = len;
@@ -42,10 +59,8 @@ int	copy_map_grid(t_data *data, int start, int total)
 	}
 	data->map_data.grid[i] = NULL;
 	data->map_data.height = i;
-	fix_map(data->map_data.grid);
 	if (is_valid_map(data))
 		return (1);
-	find_player(data);
 	return (0);
 }
 

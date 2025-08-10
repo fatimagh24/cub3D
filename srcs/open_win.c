@@ -6,7 +6,7 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:16:52 by rhasan            #+#    #+#             */
-/*   Updated: 2025/07/29 13:29:48 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 17:23:17 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	load_texture(t_data *data, t_texture *tex, char *path)
 			&tex->height);
 	if (!tex->img)
 	{
-		fprintf(stderr, "Error: Failed to load texture from path: %s\n", path);
+		ft_putstr_fd("Error: Failed to load texture from path: %s", 2);
+		ft_putstr_fd(path, 2);
+		write(2, "\n", 1);
 		destroy_game(data);
 		exit(1);
 	}
@@ -51,9 +53,10 @@ static void	handle_parsing_error(int return_parse, t_data *game)
 
 static void	init_hooks_and_loop(t_data *game)
 {
-	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win_ptr, KeyPress, KeyPressMask, key_press, game);
+	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, key_release, game);
 	mlx_hook(game->win_ptr, 17, 0, close_window, game);
-	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
+	mlx_hook(game->win_ptr, MotionNotify, PointerMotionMask, mouse_move, game);
 	mlx_loop_hook(game->mlx_ptr, render_frame, game);
 	mlx_loop(game->mlx_ptr);
 }

@@ -6,9 +6,11 @@
 /*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/07/31 10:19:08 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/10 17:21:20 by rhasan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 #include "../includes/cub3d.h"
 
@@ -26,26 +28,44 @@ int	check_colors(char **rgb)
 	return (0);
 }
 
+static	int	check_str_color(char *c)
+{
+	int	j;
+	int	has_digit;
+
+	j = 0;
+	has_digit = 0;
+	while (c[j])
+	{
+		if (c[j] != ' ' && c[j] != '\t' && c[j] != '\n')
+		{
+			if (!ft_isdigit((c[j])))
+				return (1);
+			has_digit = 1;
+		}
+		j++;
+	}
+	return (has_digit);
+}
+
 int	check_digit_color(char **rgb)
 {
 	int	i;
 	int	j;
 	int	val;
+	int	has_digit;
 
 	i = 0;
 	val = 0;
 	while (i < 3)
 	{
+		if (!rgb[i])
+			return (1);
 		j = 0;
-		while (rgb[i][j])
-		{
-			if (rgb[i][j] != ' ' && rgb[i][j] != '\t' && rgb[i][j] != '\n')
-			{
-				if (!ft_isdigit((rgb[i][j])))
-					return (1);
-			}
-			j++;
-		}
+		has_digit = 0;
+		has_digit = check_str_color(rgb[i]);
+		if (!has_digit)
+			return (1);
 		val = ft_atoi(rgb[i]);
 		if (val < 0 || val > 255)
 			return (1);
@@ -82,3 +102,28 @@ int	has_single_player(char **map)
 	}
 	return (0);
 }
+
+int	map_not_last(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '\n' && map[i][j + 1] == '\0' && !map[i + 1])
+			{
+				ft_putstr_fd("Error: invalid extra lines after map\n", 2);
+				return (1);
+			}
+			else
+				j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
