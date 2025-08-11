@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_check_two.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/08/10 17:21:20 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/11 13:10:26 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,3 @@ int	map_not_last(char **map)
 	}
 	return (0);
 }
-

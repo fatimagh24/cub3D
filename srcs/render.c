@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:24:10 by rhasan            #+#    #+#             */
-/*   Updated: 2025/08/10 16:21:47 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/11 12:59:21 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,28 @@ static void	draw_floor(t_data *data)
 	}
 }
 
-// int	render_frame(t_data *data)
-// {
-// 	draw_ceiling(data);
-// 	draw_floor(data);
-// 	raycasting(data);
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-// 	return (0);
-// }
-int render_frame(t_data *data)
+int	render_frame(t_data *data)
 {
-    double move_speed = 0.05;
-    double rot_speed = 0.03;
+	double	move_speed;
+	double	rot_speed;
 
-    draw_ceiling(data);
-    draw_floor(data);
-    raycasting(data);
-
-    if (data->move_forward)
-        move_forward(data, move_speed);
-    if (data->move_backward)
-        move_backward(data, move_speed);
-    if (data->move_left)
-        move_left(data, move_speed);
-    if (data->move_right)
-        move_right(data, move_speed);
-    if (data->rotate_left)
-        rotate_player(data, -rot_speed);
-    if (data->rotate_right)
-        rotate_player(data, rot_speed);
-
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-    return (0);
+	rot_speed = 0.03;
+	move_speed = 0.05;
+	draw_ceiling(data);
+	draw_floor(data);
+	raycasting(data);
+	if (data->move_forward)
+		move_forward(data, move_speed);
+	if (data->move_backward)
+		move_backward(data, move_speed);
+	if (data->move_left)
+		move_left(data, move_speed);
+	if (data->move_right)
+		move_right(data, move_speed);
+	if (data->rotate_left)
+		rotate_player(data, -rot_speed);
+	if (data->rotate_right)
+		rotate_player(data, rot_speed);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	return (0);
 }
-

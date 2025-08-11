@@ -1,12 +1,12 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*	                                                                        */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:51:41 by fghanem           #+#    #+#             */
-/*   Updated: 2025/08/10 17:24:19 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/11 13:14:38 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ typedef struct s_data
 	char		*w_path;
 	int			last_mouse_x;
 	int			mouse_captured;
-	int move_forward;
-    int move_backward;
-    int move_left;
-    int move_right;
-    int rotate_left;
-    int rotate_right;
+	int			move_forward;
+	int			move_backward;
+	int			move_left;
+	int			move_right;
+	int			rotate_left;
+	int			rotate_right;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -130,7 +130,6 @@ typedef struct s_data
 	t_map		map_data;
 	t_color		floor_color;
 	t_color		ceiling_color;
-
 }				t_data;
 
 int				close_window(void *param);
@@ -149,7 +148,7 @@ int				is_player_path_correct(t_map *map, int px, int py);
 int				is_walkable(t_data *data, double x, double y);
 int				key_press(int keycode, void *param);
 int				check_map_content(char **grid, int i);
-int key_release(int keycode, void *param);
+int				key_release(int keycode, void *param);
 int				map_not_last(char **map);
 char			**copy_grid(char **grid, int height);
 void			free_grid(char **grid);

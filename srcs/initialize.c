@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 14:15:31 by rhasan            #+#    #+#             */
-/*   Updated: 2025/08/10 16:23:49 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/11 13:06:58 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ static void	init_all_settings(t_data *data)
 	data->line_len = 0;
 	data->endian = 0;
 	data->move_forward = 0;
-    data->move_backward = 0;
-    data->move_left = 0;
-    data->move_right = 0;
-    data->rotate_left = 0;
-    data->rotate_right = 0;
-	init_texture(&data->north);
-	init_texture(&data->south);
-	init_texture(&data->east);
-	init_texture(&data->west);
+	data->move_backward = 0;
+	data->move_left = 0;
+	data->move_right = 0;
+	data->rotate_left = 0;
+	data->rotate_right = 0;
 }
 
 void	init_data(t_data *data, t_map *map)
@@ -80,6 +76,10 @@ void	init_data(t_data *data, t_map *map)
 	data->s_path = NULL;
 	data->w_path = NULL;
 	init_all_settings(data);
+	init_texture(&data->north);
+	init_texture(&data->south);
+	init_texture(&data->east);
+	init_texture(&data->west);
 }
 
 void	init_map(t_map *map)

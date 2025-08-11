@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_checking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhasan <rhasan@student.42amman.com>        +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:19:15 by fghanem           #+#    #+#             */
-/*   Updated: 2025/08/10 12:50:23 by rhasan           ###   ########.fr       */
+/*   Updated: 2025/08/11 13:11:45 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	check_map(char **grid, t_map *map)
 					|| grid[i][j] == '\r')
 					j++;
 				if (grid[i][j] != '1' || grid[i][ft_strlen(grid[i]) - 1] != '1')
-					return (ft_putstr_fd("ERROR: invalid wall or map must be the last\n", 2), 1);
+					return (ft_putstr_fd("ERROR: invalid map\n", 2), 1);
 			}
 			j++;
 		}
