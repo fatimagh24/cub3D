@@ -6,11 +6,9 @@
 /*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 12:32:45 by fghanem           #+#    #+#             */
-/*   Updated: 2025/08/11 13:10:26 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/08/13 11:48:00 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../includes/cub3d.h"
 
 #include "../includes/cub3d.h"
 
