@@ -63,7 +63,7 @@ C 100,120,140
 ```
 - `NO`, `SO`, `WE`, `EA`: texture paths for each wall  
 - `F`, `C`: floor and ceiling colors in RGB  
-- Map grid: `1` = wall, `0` = space, `N` = player’s start position  
+- Map grid: `1` = wall, `0` = space, `N` = player’s start position "North" 
   
 ---
 
