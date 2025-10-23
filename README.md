@@ -33,7 +33,9 @@ The project focuses on:
 ---
 ## 🗺️ Example Map
 
-maps/valid_maps/map1.cub
+`maps/valid_maps/map1.cub`
+
+```text
 
 
 SO ./textures/south.xpm
@@ -58,11 +60,11 @@ C 100,120,140
 11110111 1110101 101111010001
 11111111 1111111 111111111111
 
-
+```
 - `NO`, `SO`, `WE`, `EA`: texture paths for each wall  
 - `F`, `C`: floor and ceiling colors in RGB  
 - Map grid: `1` = wall, `0` = space, `N` = player’s start position  
-
+  
 ---
 
 ## 🧱 Textures Preview
