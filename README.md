@@ -1,91 +1,73 @@
 # 🌀 Cub3D – Maze Runner
 
-> “The maze isn’t just walls... it’s a test of logic, math, and imagination.”
+Welcome to **Cub3D**, a 3D maze exploration game inspired by *Wolfenstein 3D* 🕹️  
+Developed as part of the **42 School curriculum**, this project dives deep into **raycasting**, **game loop mechanics**, and **low-level graphics programming** using the **MiniLibX** library.
 
 ---
 
-Cub3D – **Maze Runner** is a 3D maze exploration project developed in **C** using the **MiniLibX** graphical library as part of the **42 Amman curriculum**.  
-The goal is to build a **raycasting engine** that transforms a 2D map into a fully interactive 3D world — inspired by classic first-person games like *Wolfenstein 3D*.  
+## 🌟 Project Overview
 
-You wake up inside a mysterious maze. The only way out? Follow the paths you create with your code.
+The goal of **Cub3D** is to create a first-person 3D game where the player navigates through a maze from a 2D map using **raycasting**.  
+It combines mathematical logic, rendering algorithms, and performance optimization — giving developers hands-on experience with core graphics concepts like **DDA (Digital Differential Analyzer)** and **ray-wall collision detection**.
 
----
-
-## 🎮 About the Project
-
-Cub3D reads a `.cub` file containing the maze layout, textures, and colors, and renders it in 3D using **raycasting**.  
-The player can move, rotate, and explore the environment freely, with each wall and color dynamically drawn based on position and direction.
-
-The project focuses on:
-- Implementing **raycasting** from scratch  
-- Rendering **walls**, **textures**, and **colored floors/ceilings**  
-- Managing **keyboard input** and **real-time movement**  
-- Parsing and validating **map files**  
-- Practicing **mathematics, logic, and low-level graphics programming**
+You wake up inside a mysterious maze. The walls are high, the paths are endless, and the only way out is through **code**. 💻
 
 ---
 
-![Gameplay Screenshot](images/game1.png)
-![Gameplay Screenshot 2](images/game2.png)
-![Gameplay Screenshot 2](images/game3.png)
-*Screenshots from the game showing different maze views*
+## 🚀 Features
+
+- 🔭 **Raycasting Engine**
+  - Uses the DDA (Digital Differential Analyzer) algorithm for precise wall collision detection
+  - Simulates 3D depth with perspective projection for a realistic first-person view
+
+- 🧱 **Wall Rendering**
+  - Supports textures for all directions: North, South, East, and West
+  - Accurate texture mapping to make walls look immersive
+
+- 📜 **Map Parsing & Validation**
+  - Reads `.cub` files with textures, floor/ceiling colors, and maze layout
+  - Checks map validity: player position, walls closure, and correct identifiers
+
+- 👤 **Player Movement**
+  - `W`, `A`, `S`, `D` to move around the maze
+  - Arrow keys to rotate smoothly and explore corners
+  - Collision detection prevents walking through walls
+
+- 🎨 **Floor & Ceiling Colors**
+  - Custom RGB colors for floor and ceiling from `.cub` configuration
+  - Creates a more immersive maze atmosphere
+
+## 🌌 Screenshots
+
+| Exploring the Maze | Turning Corners | Inside the Grid |
+|:------------------:|:----------------:|:----------------:|
+| ![Gameplay Screenshot](images/game1.png) | ![Gameplay Screenshot 2](images/game2.png) | ![Gameplay Screenshot 3](images/game3.png) |
+
+*Screenshots from the Maze Runner world.*
 
 ---
-## 🗺️ Example Map
 
-`maps/valid_maps/map1.cub`
-
-```text
+## 🧾 File Format Example (`.cub`)
+```cub
+NO ./textures/north.xpm
 SO ./textures/south.xpm
 WE ./textures/west.xpm
-NO ./textures/north.xpm
 EA ./textures/east.xpm
-F 92,91,86
-C 100,120,140
+F 220,100,0
+C 225,30,0
 
-        1111111111111111111111111
-        1000000000110000000000001
-        1011000001110000000000001
-        1001000000000000000000001
-111111111011000001110000000000001
-100000000011000001110111111111111
-11110111111111011100000000001
-11110111111111011101110100001
-11000000110101011100100101001
-10000000000000001100100111001
-10000000000000001101010000001
-11000001110101011111011100E0111
-11110111 1110101 101111010001
-11111111 1111111 111111111111
+1111111111
+1000000001
+1000110001
+1000N00001
+1111111111
 
-```
-- `NO`, `SO`, `WE`, `EA`: texture paths for each wall  
-- `F`, `C`: floor and ceiling colors in RGB  
-- Map grid: `1` = wall, `0` = space, `N` = player’s start position "North" 
-  
----
+NO/SO/WE/EA: Texture paths for walls
+F/C: RGB colors for Floor and Ceiling
+1: Wall, 0: Empty space
+N: Player starting position and direction
 
-## 🧱 Textures Preview
-
-| North | South | West | East |
-|:------:|:------:|:------:|:------:|
-| ![North Wall](./images/north.png) | ![South Wall](./images/south.png) | ![West Wall](./images/west.png) | ![East Wall](./images/east.png) |
-
----
-
-## ⚙️ How to Run
-
-To build and run **Maze Runner**, follow these steps:
-
-```bash
-# 1️⃣ Clone the repository
-git clone https://github.com/fatimagh24/cub3D.git
-cd cub3D
-
-# 2️⃣ Build the project
-make
-
-# 3️⃣ Run the game with a map
-./cub3D maps/valid_maps/map1.cub
-or
-./cub3D maps/valid_maps/map2.cub
+## 👥 Team
+This project was developed as part of the 42 School curriculum by:  
+👩‍💻 [@fatimagh24](https://github.com/fatimagh24)  
+👩‍💻 [@razanhasan42](https://github.com/razanhasan42)
