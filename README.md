@@ -36,8 +36,6 @@ The project focuses on:
 `maps/valid_maps/map1.cub`
 
 ```text
-
-
 SO ./textures/south.xpm
 WE ./textures/west.xpm
 NO ./textures/north.xpm
