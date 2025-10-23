@@ -81,11 +81,13 @@ To build and run **Maze Runner**, follow these steps:
 
 ```bash
 # 1️⃣ Clone the repository
-git clone https://github.com/fatimagh24/cub3d.git
-cd cub3d
+git clone https://github.com/fatimagh24/cub3D.git
+cd cub3D
 
 # 2️⃣ Build the project
 make
 
 # 3️⃣ Run the game with a map
-./cub3D maps/maze.cub
+./cub3D maps/valid_maps/map1.cub
+or
+./cub3D maps/valid_maps/map2.cub
