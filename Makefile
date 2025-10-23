@@ -25,9 +25,10 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(src:%.c=%.o))
 all: $(NAME)
 
 $(LIBFT) :
-		@$(MAKE) -C $(LIBFT_DIR) all
+	$(MAKE) -C $(LIBFT_DIR) all
 
-$(NAME): $(OBJ) $(LIBFT) | libft
+
+$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDES) -lm $(OBJ) $(LIBFT) $(MLX_LIB) -o $(NAME)
 
 
@@ -47,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean libft

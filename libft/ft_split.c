@@ -3,44 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fghanem <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fghanem <fghanem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 11:40:44 by fghanem           #+#    #+#             */
-/*   Updated: 2024/09/11 13:28:00 by fghanem          ###   ########.fr       */
+/*   Updated: 2025/08/25 13:13:44 by fghanem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <stdio.h>
-
 static int	ft_wcount(const char *s, char c)
 {
-	int	count;
+	int	ct;
 
-	count = 0;
+	ct = 0;
 	while (*s != '\0')
 	{
 		while (*s == c)
 			s++;
 		if (*s != '\0')
-			count++;
+			ct++;
 		while (*s && *s != c)
 			s++;
 	}
-	return (count);
+	return (ct);
 }
 
 static char	*ft_wdup(const char *s, size_t len)
 {
-	char	*word;
+	char	*wd;
 
-	word = (char *)malloc(len + 1);
-	if (!word)
+	wd = (char *)malloc(len + 1);
+	if (!wd)
 		return (NULL);
-	ft_memcpy(word, s, len);
-	word[len] = '\0';
-	return (word);
+	ft_memcpy(wd, s, len);
+	wd[len] = '\0';
+	return (wd);
 }
 
 static int	ft_check(char **s, size_t i)

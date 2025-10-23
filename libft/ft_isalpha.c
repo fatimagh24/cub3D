@@ -21,12 +21,3 @@ int	ft_isalpha(int c)
 	}
 	return (0);
 }
-/*
-int main()
-{
-	char x = 'l';
-
-	printf("%d\n", ft_isalpha(x));
-	printf("%d", isalpha(x));
-	return(0);
-}*/
