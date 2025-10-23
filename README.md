@@ -66,6 +66,7 @@ NO/SO/WE/EA: Texture paths for walls
 F/C: RGB colors for Floor and Ceiling
 1: Wall, 0: Empty space
 N: Player starting position and direction
+```
 
 ## 👥 Team
 This project was developed as part of the 42 School curriculum by:  
