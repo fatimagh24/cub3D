@@ -67,11 +67,9 @@ C 100,120,140
 
 ## 🧱 Textures Preview
 
-| North | South | East | West |
-|:------:|:------:|:-----:|:-----:|
-| ![North](/images/north.png) | ![South](/images/south.png) | ![East](/images/east.png) | ![West](/images/west.png) |
-
-*(These are the textures loaded by the game. You can replace them with your own designs.)*
+| North | South | West | East |
+|:------:|:------:|:------:|:------:|
+| ![North Wall](./images/north.png) | ![South Wall](./images/south.png) | ![West Wall](./images/west.png) | ![East Wall](./images/east.png) |
 
 ---
 
